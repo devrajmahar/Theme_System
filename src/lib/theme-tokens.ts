@@ -1,13 +1,13 @@
 export const DEFAULT_THEME_CSS = `:root {
   /* Surfaces */
-  --surface: #fcfcfc;
-  --surface-secondary: #f3f3f3;
+  --surface: #ffffff;
+  --surface-secondary: #fafafa;
 
   /* Borders */
   --border: color-mix(in srgb, #141414 8%, transparent);
   --border-secondary: var(--border);
-  --input-fill: var(--surface);
-  --input-border: var(--border);
+  --input-fill: var(--surface-secondary);
+  --input-border: var(--border-secondary);
 
   /* Text */
   --text-primary: #141414;
@@ -15,8 +15,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --text-muted: color-mix(in srgb, #141414 36%, transparent);
 
   /* Interaction states */
-  --hover-bg: color-mix(in srgb, #141414 4%, transparent);
-  --active-bg: color-mix(in srgb, #141414 6%, transparent);
+  --hover-bg: color-mix(in srgb, #141414 3.5%, transparent);
+  --active-bg: color-mix(in srgb, #141414 5%, transparent);
 
   /* Icons */
   --icon: color-mix(in srgb, #141414 50%, transparent);
