@@ -4,7 +4,7 @@ export const DEFAULT_THEME_CSS = `:root {
   --surface-secondary: #fafafa;
 
   /* Borders */
-  --border: color-mix(in srgb, #141414 8%, transparent);
+  --border: color-mix(in srgb, #141414 6%, transparent);
   --border-secondary: var(--border);
   --input-fill: var(--surface-secondary);
   --input-border: var(--border-secondary);

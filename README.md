@@ -19,8 +19,8 @@ Defined in `src/app/globals.css` as CSS variables, also mapped to Tailwind utili
 | --- | --- | --- | --- |
 | Surface | `#FFFFFF` | `#141414` | `bg-surface` |
 | Secondary Surface | `#FAFAFA` | `#181818` | `bg-surface-secondary` |
-| Border | `#141414` 8% | `#F0F0F0` 8% | `border-border` |
-| Secondary Border | `#141414` 8% | `#F0F0F0` 8% | `border-border-secondary` |
+| Border | `#141414` 6% | `#F0F0F0` 8% | `border-border` |
+| Secondary Border | `#141414` 6% | `#F0F0F0` 8% | `border-border-secondary` |
 
 **Rule:** `border-border` on primary surface · `border-border-secondary` on secondary surface.
 | Primary Text | `#141414` | `#F0F0F0` | `text-text-primary` |
