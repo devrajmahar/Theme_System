@@ -6,8 +6,6 @@
   /* Surfaces */
   --surface: #ffffff;
   --surface-secondary: #fafafa;
-  --surface-inverted: #141414;
-  --surface-inverted-foreground: #f0f0f0;
 
   /* Borders */
   --border: #1414140f;
@@ -34,6 +32,9 @@
   --danger: #fb3748;
   --danger-foreground: #ffffff;
 
+  /* Buttons */
+  --button-fill: #333333;
+
   /* Focus */
   --ring: #14141433;
 
@@ -50,8 +51,6 @@
 .dark {
   --surface: #141414;
   --surface-secondary: #181818;
-  --surface-inverted: #ffffff;
-  --surface-inverted-foreground: #333333;
 
   --border: #f0f0f014;
   --border-secondary: var(--border);
@@ -72,6 +71,7 @@
   --primary-foreground: #fff;
   --danger: #fb3748;
   --danger-foreground: #ffffff;
+  --button-fill: #F7F7F7;
 
   --ring: #f0f0f026;
 
@@ -110,8 +110,7 @@
 @theme inline {
   --color-surface: var(--surface);
   --color-surface-secondary: var(--surface-secondary);
-  --color-surface-inverted: var(--surface-inverted);
-  --color-surface-inverted-foreground: var(--surface-inverted-foreground);
+  --color-button-fill: var(--button-fill);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

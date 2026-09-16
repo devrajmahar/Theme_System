@@ -2,8 +2,6 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Surfaces */
   --surface: #ffffff;
   --surface-secondary: #fafafa;
-  --surface-inverted: #141414;
-  --surface-inverted-foreground: #f0f0f0;
 
   /* Borders */
   --border: #1414140f;
@@ -30,6 +28,9 @@ export const DEFAULT_THEME_CSS = `:root {
   --danger: #fb3748;
   --danger-foreground: #ffffff;
 
+  /* Buttons */
+  --button-fill: #333333;
+
   /* Focus */
   --ring: #14141433;
 
@@ -47,8 +48,6 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Surfaces */
   --surface: #141414;
   --surface-secondary: #181818;
-  --surface-inverted: #ffffff;
-  --surface-inverted-foreground: #333333;
 
   /* Borders */
   --border: #f0f0f014;
@@ -75,6 +74,9 @@ export const DEFAULT_THEME_CSS = `:root {
   --danger: #fb3748;
   --danger-foreground: #ffffff;
 
+  /* Buttons */
+  --button-fill: #F7F7F7;
+
   /* Focus */
   --ring: #f0f0f026;
 
@@ -84,12 +86,12 @@ export const DEFAULT_THEME_CSS = `:root {
 }`;
 
 export const TOKEN_GROUPS = [
-  { label: "Surfaces", tokens: ["surface", "surface-secondary", "surface-inverted", "surface-inverted-foreground"] },
+  { label: "Surfaces", tokens: ["surface", "surface-secondary"] },
   { label: "Inputs", tokens: ["input-fill", "input-border"] },
   { label: "Text", tokens: ["text-primary", "text-secondary", "text-muted"] },
   { label: "States", tokens: ["hover-bg", "active-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
-  { label: "Actions", tokens: ["primary", "primary-foreground", "danger", "danger-foreground"] },
+  { label: "Actions", tokens: ["primary", "primary-foreground", "danger", "danger-foreground", "button-fill"] },
   { label: "Chart", tokens: ["bullish", "bearish"] },
   { label: "Radius", tokens: ["radius-default", "radius-small", "radius-large"] },
 ] as const;
