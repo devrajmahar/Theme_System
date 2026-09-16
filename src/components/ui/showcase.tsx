@@ -2,9 +2,10 @@ import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNo
 
 const focus = "outline-none focus-visible:border-ring focus-visible:ring-[2px] focus-visible:ring-ring/50";
 
-export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive"; size?: "default" | "sm" | "icon" }) {
+export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "inverted"; size?: "default" | "sm" | "icon" }) {
   const variants = {
     default: "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/85 [&_svg]:text-primary-foreground",
+    inverted: "bg-surface-inverted text-surface-inverted-foreground hover:bg-surface-inverted/90 active:bg-surface-inverted/85 [&_svg]:text-surface-inverted-foreground",
     secondary: "ui-secondary border text-secondary-foreground [&_svg]:text-icon hover:[&_svg]:text-icon-active",
     outline: "border bg-background text-foreground hover:bg-hover-bg active:bg-active-bg [&_svg]:text-icon hover:[&_svg]:text-icon-active",
     ghost: "text-foreground hover:bg-hover-bg active:bg-active-bg [&_svg]:text-icon hover:[&_svg]:text-icon-active",
