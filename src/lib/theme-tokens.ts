@@ -6,6 +6,7 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Borders */
   --border: #1414140f;
   --border-secondary: var(--border);
+  --border-width: 0.5px;
   --input-fill: var(--surface-secondary);
   --input-border: var(--border-secondary);
 
@@ -52,6 +53,7 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Borders */
   --border: #f0f0f014;
   --border-secondary: var(--border);
+  --border-width: 0.5px;
   --input-fill: var(--surface-secondary);
   --input-border: var(--border-secondary);
 
