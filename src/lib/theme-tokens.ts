@@ -77,7 +77,7 @@ export const DEFAULT_THEME_CSS = `:root {
   --danger-foreground: #ffffff;
 
   /* Buttons */
-  --button-fill: #F7F7F7;
+  --button-fill: #EBEBEB;
 
   /* Focus */
   --ring: #f0f0f026;
