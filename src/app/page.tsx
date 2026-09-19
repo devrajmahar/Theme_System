@@ -2,11 +2,12 @@
 
 import { useState, type ReactNode } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Add01Icon, ArrowRight01Icon, Calendar03Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
+import { Add01Icon, ArrowRight01Icon, Calendar03Icon, Copy01Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, Tick02Icon, UserIcon } from "@hugeicons/core-free-icons";
 import { BellIcon, CalendarIcon, ChatRoundDotsIcon, FolderIcon, HomeIcon, LetterIcon, MagnifierIcon, SettingsIcon, UserIcon as SolarUserIcon } from "@solar-icons/react/bold";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PalettePlayground } from "@/components/palette-playground";
 import { FancyButtonShowcase } from "@/components/fancy-button-showcase";
+import { formatOklch, hexToOklch } from "@/lib/color";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Label } from "@/components/ui/showcase";
 
 const navItems = [["Overview", Home01Icon], ["Projects", Folder01Icon], ["Messages", Mail01Icon], ["Calendar", Calendar03Icon], ["Settings", Settings01Icon]] as const;
@@ -118,4 +119,12 @@ function CandlestickPreview() {
   );
 }
 
-function TokenPreview() { const colors = ["surface","surface-secondary","border","border-secondary","input-fill","input-border","text-primary","text-secondary","text-muted","hover-bg","active-bg","icon","icon-active","primary","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-[var(--radius-default)] border bg-card"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card>; }
+function TokenPreview() { const colors = ["surface","surface-secondary","border","border-secondary","input-fill","input-border","text-primary","text-secondary","text-muted","hover-bg","active-bg","icon","icon-active","primary","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-[var(--radius-default)] border bg-card"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card><HexToOklchCard /></div>; }
+
+function HexToOklchCard() {
+  const [hex, setHex] = useState("#168ef7");
+  const [copied, setCopied] = useState(false);
+  const result = hexToOklch(hex);
+  const copy = async () => { if (!result) return; await navigator.clipboard.writeText(formatOklch(result)); setCopied(true); window.setTimeout(() => setCopied(false), 1400); };
+  return <Card><CardHeader className="pb-4"><CardTitle className="text-base">Hex → OKLCH</CardTitle><CardDescription>Type a hex color to get its OKLCH value for theme tokens.</CardDescription></CardHeader><CardContent><div className="flex flex-col gap-3 sm:flex-row sm:items-end"><div className="flex items-center gap-3"><div className="size-10 shrink-0 rounded-[var(--radius-default)] border" style={{ background: result ? `#${hex.trim().replace(/^#/, "")}` : "transparent" }} /><div className="w-36"><Label>Hex</Label><Input value={hex} onChange={(e) => setHex(e.target.value)} placeholder="#168ef7" spellCheck={false} className="mt-1.5 font-mono" /></div></div><div className="flex flex-1 flex-wrap items-center gap-2">{result ? <><code className="rounded-[var(--radius-default)] border bg-surface-secondary px-3 py-2 font-mono text-sm">{formatOklch(result)}</code><Button variant="secondary" size="sm" onClick={copy}><HugeiconsIcon icon={copied ? Tick02Icon : Copy01Icon} size={15} /> {copied ? "Copied" : "Copy"}</Button></> : <p className="text-sm text-text-muted">Enter a valid 3- or 6-digit hex color.</p>}</div></div></CardContent></Card>;
+}
