@@ -156,6 +156,10 @@
   --color-icon-active: var(--icon-active);
   --color-bullish: var(--bullish);
   --color-bearish: var(--bearish);
+  --shadow-fancy-neutral: var(--fancy-shadow-neutral);
+  --shadow-fancy-primary: var(--fancy-shadow-primary);
+  --shadow-fancy-destructive: var(--fancy-shadow-destructive);
+  --shadow-fancy-basic: var(--fancy-shadow-basic);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -216,4 +220,22 @@ button:disabled { cursor: not-allowed; }
 @media (min-width: 1024px) {
   .lg\:border-l { border-left-width: var(--border-width); }
   .lg\:border-t-0 { border-top-width: 0; }
+}
+
+/* FancyButton — additive shadow tokens (existing theme untouched).
+   Gloss overlays are intentionally non-themeable (always white at low opacity).
+   Border rings come from the theme where possible (--primary/--danger);
+   neutral keeps its exact #242628 ring in both themes. */
+:root {
+  --fancy-shadow-neutral: 0 1px 2px 0 #1b1c1d7a, 0 0 0 1px #242628;
+  --fancy-shadow-primary: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--primary);
+  --fancy-shadow-destructive: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--danger);
+  --fancy-shadow-basic: 0 1px 3px 0 #0e121b1f, 0 0 0 1px #ebebeb;
+}
+
+.dark {
+  --fancy-shadow-neutral: 0 1px 2px 0 #00000066, 0 0 0 1px #242628;
+  --fancy-shadow-primary: 0 1px 2px 0 #00000066, 0 0 0 1px var(--primary);
+  --fancy-shadow-destructive: 0 1px 2px 0 #00000066, 0 0 0 1px var(--danger);
+  --fancy-shadow-basic: 0 1px 3px 0 #00000055, 0 0 0 1px #262626;
 }

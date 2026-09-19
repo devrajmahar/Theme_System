@@ -43,6 +43,12 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Chart */
   --bullish: #089981;
   --bearish: #f7525f;
+
+  /* FancyButton shadows (additive) */
+  --fancy-shadow-neutral: 0 1px 2px 0 #1b1c1d7a, 0 0 0 1px #242628;
+  --fancy-shadow-primary: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--primary);
+  --fancy-shadow-destructive: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--danger);
+  --fancy-shadow-basic: 0 1px 3px 0 #0e121b1f, 0 0 0 1px #ebebeb;
 }
 
 .dark {
@@ -85,6 +91,12 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Chart */
   --bullish: #7c8db0;
   --bearish: #98615c;
+
+  /* FancyButton shadows (additive) */
+  --fancy-shadow-neutral: 0 1px 2px 0 #00000066, 0 0 0 1px #242628;
+  --fancy-shadow-primary: 0 1px 2px 0 #00000066, 0 0 0 1px var(--primary);
+  --fancy-shadow-destructive: 0 1px 2px 0 #00000066, 0 0 0 1px var(--danger);
+  --fancy-shadow-basic: 0 1px 3px 0 #00000055, 0 0 0 1px #262626;
 }`;
 
 export const TOKEN_GROUPS = [
@@ -94,6 +106,7 @@ export const TOKEN_GROUPS = [
   { label: "States", tokens: ["hover-bg", "active-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Actions", tokens: ["primary", "primary-foreground", "danger", "danger-foreground", "button-fill"] },
+  { label: "Fancy", tokens: ["fancy-shadow-neutral", "fancy-shadow-primary", "fancy-shadow-destructive", "fancy-shadow-basic"] },
   { label: "Chart", tokens: ["bullish", "bearish"] },
   { label: "Radius", tokens: ["radius-default", "radius-small", "radius-large"] },
 ] as const;
