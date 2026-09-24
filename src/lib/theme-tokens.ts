@@ -37,6 +37,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Radius */
   --radius-default: 8px;
+  --radius-medium: 12px;
   --radius-small: 4px;
   --radius-large: 999px;
 
@@ -65,7 +66,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Text */
   --text-primary: #f0f0f0;
-  --text-secondary: #f0f0f0bd;
+  --text-secondary: #AEAEB2;
   --text-muted: #f0f0f05c;
 
   /* Interaction states */
@@ -108,5 +109,5 @@ export const TOKEN_GROUPS = [
   { label: "Actions", tokens: ["primary", "primary-foreground", "danger", "danger-foreground", "button-fill"] },
   { label: "Fancy", tokens: ["fancy-shadow-neutral", "fancy-shadow-primary", "fancy-shadow-destructive", "fancy-shadow-basic"] },
   { label: "Chart", tokens: ["bullish", "bearish"] },
-  { label: "Radius", tokens: ["radius-default", "radius-small", "radius-large"] },
+  { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large"] },
 ] as const;
