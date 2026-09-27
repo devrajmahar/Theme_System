@@ -26,7 +26,7 @@ export function Badge({ variant = "default", className = "", ...props }: HTMLAtt
   const variants = {
     default: "h-5 min-w-5 rounded-large px-1.5 bg-primary text-primary-foreground",
     destructive: "h-5 min-w-5 rounded-large px-1.5 bg-danger text-danger-foreground",
-    secondary: "h-5 gap-1 rounded-button border border-border-subtle bg-surface-subtle px-1.5 text-text-secondary",
+    secondary: "h-5 gap-1 rounded-large border border-border-subtle bg-surface-subtle px-1.5 text-text-secondary",
     outline: "h-5 gap-1.5 rounded-large border border-dashed border-border-inverse bg-button-fill-subtle px-2 text-text-default",
   };
   return <span className={`inline-flex shrink-0 items-center justify-center overflow-clip text-xs font-medium leading-[14px] [&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0 ${variants[variant]} ${className}`} {...props} />;
@@ -39,3 +39,5 @@ export function CardTitle({ className = "", ...props }: HTMLAttributes<HTMLHeadi
 export function CardDescription({ className = "", ...props }: HTMLAttributes<HTMLParagraphElement>) { return <p className={`text-sm text-text-secondary ${className}`} {...props} />; }
 export function CardContent({ className = "", ...props }: HTMLAttributes<HTMLDivElement>) { return <div className={`px-6 pb-6 ${className}`} {...props} />; }
 export function Label({ children, className = "", ...props }: HTMLAttributes<HTMLLabelElement> & { children: ReactNode }) { return <label className={`text-sm font-medium leading-none ${className}`} {...props}>{children}</label>; }
+// Validation message under a field (Conduit: 12/14px regular, destructive text). Pair with aria-invalid on the input.
+export function FieldError({ className = "", ...props }: HTMLAttributes<HTMLParagraphElement>) { return <p role="alert" className={`text-xs font-normal leading-[14px] text-text-danger ${className}`} {...props} />; }

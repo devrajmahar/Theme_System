@@ -23,6 +23,7 @@ export const DEFAULT_THEME_CSS = `:root {
   --text-muted: #c2c2c2;
   --text-positive: var(--positive);
   --text-negative: var(--negative);
+  --text-danger: var(--danger);
   --text-warning: #ff6900;
   /* Text on interactive items (buttons, tabs, links). Keep these values in
      step with --icon / --icon-active: normal text = normal icon colour,
@@ -121,6 +122,7 @@ export const DEFAULT_THEME_CSS = `:root {
   --text-muted: #808080;
   --text-positive: var(--positive);
   --text-negative: var(--negative);
+  --text-danger: #ffa2a2;
   --text-warning: #ffb86a;
   --text-interactive: #c2c2c2;
   --text-hover: #f0f0f0;
@@ -180,7 +182,7 @@ export const DEFAULT_THEME_CSS = `:root {
 export const TOKEN_GROUPS = [
   { label: "Surfaces", tokens: ["surface", "surface-secondary", "surface-subtle", "surface-raised", "surface-overlay", "surface-inverse"] },
   { label: "Borders", tokens: ["border", "border-secondary", "border-subtle", "border-softer", "border-strong", "border-inverse"] },
-  { label: "Text", tokens: ["text-primary", "text-default", "text-secondary", "text-muted", "text-positive", "text-negative", "text-warning", "text-interactive", "text-hover", "text-active"] },
+  { label: "Text", tokens: ["text-primary", "text-default", "text-secondary", "text-muted", "text-positive", "text-negative", "text-danger", "text-warning", "text-interactive", "text-hover", "text-active"] },
   { label: "States", tokens: ["hover-bg", "active-bg", "disabled-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },

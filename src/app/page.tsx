@@ -6,7 +6,7 @@ import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CreditCar
 import { BellIcon, CalendarIcon, ChatRoundDotsIcon, FolderIcon, HomeIcon, LetterIcon, MagnifierIcon, SettingsIcon, UserIcon as SolarUserIcon } from "@solar-icons/react/bold";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PalettePlayground } from "@/components/palette-playground";
-import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Input, Label } from "@/components/ui/showcase";
+import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, FieldError, Input, Label } from "@/components/ui/showcase";
 
 const navItems = [["Overview", Home01Icon], ["Projects", Folder01Icon], ["Messages", Mail01Icon], ["Calendar", Calendar03Icon], ["Settings", Settings01Icon]] as const;
 const iconExamples = [["Home", Home01Icon], ["Search", Search01Icon], ["Projects", Folder01Icon], ["Messages", Mail01Icon], ["Calendar", Calendar03Icon], ["Alerts", Notification03Icon], ["Profile", UserIcon], ["Settings", Settings01Icon]] as const;
@@ -31,9 +31,7 @@ export default function Home() {
 }
 
 function ComponentsPreview() { return <div className="grid gap-4 lg:grid-cols-2">
-  {/* Auth forms follow Conduit's sign-in page: the form sits on --surface-secondary (their page-body),
-      so --surface inputs and outline buttons read clearly. App pages keep content on --surface. */}
-  <Card className="bg-surface-secondary!"><CardHeader><div className="flex items-start justify-between"><div><CardTitle>Create account</CardTitle><CardDescription className="mt-1.5">Enter your details to get started.</CardDescription></div><Badge>New</Badge></div></CardHeader><CardContent><div className="space-y-4"><div className="space-y-2"><Label>Email address</Label><Input type="email" placeholder="name@example.com" /></div><div className="space-y-2"><Label>Password</Label><Input type="password" defaultValue="secretpass" /></div><div className="flex gap-2"><Button className="flex-1">Create account <HugeiconsIcon icon={ArrowRight01Icon} size={16} /></Button><Button variant="outline">Cancel</Button></div></div></CardContent></Card>
+  <SignUpCard />
   <div className="grid gap-4"><Card><CardHeader className="pb-4"><CardTitle className="text-base">Button variants</CardTitle><CardDescription>Hover, focus, active, and disabled states.</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="destructive"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button disabled>Disabled</Button></CardContent></Card><Card><CardHeader className="pb-4"><CardTitle className="text-base">Badges & status</CardTitle></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge>Default</Badge><Badge variant="secondary">In review</Badge><Badge variant="outline">Draft</Badge><Badge variant="destructive">Failed</Badge><span className="inline-flex items-center gap-1.5 text-sm text-text-secondary"><span className="size-2 rounded-large bg-primary" /> Operational</span></CardContent></Card></div>
   </div>; }
 
@@ -123,4 +121,27 @@ function CandlestickPreview() {
   );
 }
 
-function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card></div>; }
+function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card></div>; }
+
+// Auth forms follow Conduit's sign-in page: the form sits on --surface-secondary (their page-body),
+// so --surface inputs and outline buttons read clearly. App pages keep content on --surface.
+// Submitting empty/invalid fields sets aria-invalid (danger border + 3px danger/20 ring) and shows a FieldError.
+function SignUpCard() {
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const validate = (form: HTMLFormElement) => {
+    const data = new FormData(form);
+    const email = String(data.get("email") ?? "").trim();
+    const password = String(data.get("password") ?? "");
+    const next: typeof errors = {};
+    if (!email) next.email = "Please enter your email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "Please enter a valid email address.";
+    if (!password) next.password = "Please choose a password.";
+    else if (password.length < 8) next.password = "Password must be at least 8 characters.";
+    setErrors(next);
+  };
+  return <Card className="bg-surface-secondary!"><CardHeader><div className="flex items-start justify-between"><div><CardTitle>Create account</CardTitle><CardDescription className="mt-1.5">Enter your details to get started.</CardDescription></div><Badge>New</Badge></div></CardHeader><CardContent><form noValidate onSubmit={(e) => { e.preventDefault(); validate(e.currentTarget); }} onReset={() => setErrors({})} className="space-y-4">
+    <div className="space-y-2"><Label>Email address</Label><Input name="email" type="email" placeholder="name@example.com" aria-invalid={errors.email ? true : undefined} onChange={() => errors.email && setErrors((prev) => ({ ...prev, email: undefined }))} />{errors.email && <FieldError>{errors.email}</FieldError>}</div>
+    <div className="space-y-2"><Label>Password</Label><Input name="password" type="password" placeholder="At least 8 characters" aria-invalid={errors.password ? true : undefined} onChange={() => errors.password && setErrors((prev) => ({ ...prev, password: undefined }))} />{errors.password && <FieldError>{errors.password}</FieldError>}</div>
+    <div className="flex gap-2"><Button type="submit" variant="secondary" className="flex-1">Create account <HugeiconsIcon icon={ArrowRight01Icon} size={16} /></Button><Button type="reset" variant="outline">Cancel</Button></div>
+  </form></CardContent></Card>;
+}

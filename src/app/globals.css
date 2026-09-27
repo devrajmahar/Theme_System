@@ -27,6 +27,7 @@
   --text-muted: #c2c2c2;
   --text-positive: var(--positive);
   --text-negative: var(--negative);
+  --text-danger: var(--danger);
   --text-warning: #ff6900;
   /* Text on interactive items (buttons, tabs, links). Keep these values in
      step with --icon / --icon-active: normal text = normal icon colour,
@@ -125,6 +126,7 @@
   --text-muted: #808080;
   --text-positive: var(--positive);
   --text-negative: var(--negative);
+  --text-danger: #ffa2a2;
   --text-warning: #ffb86a;
   --text-interactive: #c2c2c2;
   --text-hover: #f0f0f0;
@@ -272,6 +274,7 @@
   --color-purple-subtle: var(--purple-subtle);
   --color-text-positive: var(--text-positive);
   --color-text-negative: var(--text-negative);
+  --color-text-danger: var(--text-danger);
   --color-text-warning: var(--text-warning);
   --color-text-interactive: var(--text-interactive);
   --color-text-hover: var(--text-hover);
