@@ -107,8 +107,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --ring: color-mix(in srgb, #f0f0f0 15%, transparent);
 
   /* Chart */
-  --bullish: #7c8db0;
-  --bearish: #98615c;
+  --bullish: #089981;
+  --bearish: #f7525f;
 }`;
 
 export const TOKEN_GROUPS = [

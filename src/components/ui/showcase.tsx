@@ -15,7 +15,7 @@ export function Button({ variant = "default", size = "default", className = "", 
   return <button className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-default text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-45 ${focus} ${variants[variant]} ${sizes[size]} ${className}`} {...props} />;
 }
 export function Badge({ variant = "default", className = "", ...props }: HTMLAttributes<HTMLSpanElement> & { variant?: "default" | "secondary" | "outline" | "destructive" }) {
-  const variants = { default: "border-transparent bg-primary text-primary-foreground", secondary: "border-transparent bg-surface-secondary text-text-primary", outline: "text-text-primary", destructive: "border-transparent bg-danger text-danger-foreground" };
+  const variants = { default: "border-transparent bg-primary text-primary-foreground", secondary: "border-border-secondary bg-surface-secondary text-text-primary", outline: "text-text-primary", destructive: "border-transparent bg-danger text-danger-foreground" };
   return <span className={`inline-flex items-center rounded-large border px-2.5 py-0.5 text-xs font-semibold ${variants[variant]} ${className}`} {...props} />;
 }
 export function Input({ className = "", style, ...props }: InputHTMLAttributes<HTMLInputElement>) { return <input className={`flex h-9 w-full rounded-default border border-input-border bg-input-fill px-3 py-1 text-sm transition-colors placeholder:text-text-secondary ${focus} disabled:opacity-50 ${className}`} {...props} />; }
