@@ -123,8 +123,7 @@ function CandlestickPreview() {
 
 function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card></div>; }
 
-// Auth forms follow Conduit's sign-in page: the form sits on --surface-secondary (their page-body),
-// so --surface inputs and outline buttons read clearly. App pages keep content on --surface.
+// Auth form: the card sits on --surface like the page; inputs sit on --surface-secondary.
 // Submitting empty/invalid fields sets aria-invalid (danger border + 3px danger/20 ring) and shows a FieldError.
 function SignUpCard() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -139,7 +138,7 @@ function SignUpCard() {
     else if (password.length < 8) next.password = "Password must be at least 8 characters.";
     setErrors(next);
   };
-  return <Card className="bg-surface-secondary!"><CardHeader><div className="flex items-start justify-between"><div><CardTitle>Create account</CardTitle><CardDescription className="mt-1.5">Enter your details to get started.</CardDescription></div><Badge>New</Badge></div></CardHeader><CardContent><form noValidate onSubmit={(e) => { e.preventDefault(); validate(e.currentTarget); }} onReset={() => setErrors({})} className="space-y-4">
+  return <Card><CardHeader><div className="flex items-start justify-between"><div><CardTitle>Create account</CardTitle><CardDescription className="mt-1.5">Enter your details to get started.</CardDescription></div><Badge>New</Badge></div></CardHeader><CardContent><form noValidate onSubmit={(e) => { e.preventDefault(); validate(e.currentTarget); }} onReset={() => setErrors({})} className="space-y-4">
     <div className="space-y-2"><Label>Email address</Label><Input name="email" type="email" placeholder="name@example.com" aria-invalid={errors.email ? true : undefined} onChange={() => errors.email && setErrors((prev) => ({ ...prev, email: undefined }))} />{errors.email && <FieldError>{errors.email}</FieldError>}</div>
     <div className="space-y-2"><Label>Password</Label><Input name="password" type="password" placeholder="At least 8 characters" aria-invalid={errors.password ? true : undefined} onChange={() => errors.password && setErrors((prev) => ({ ...prev, password: undefined }))} />{errors.password && <FieldError>{errors.password}</FieldError>}</div>
     <div className="flex gap-2"><Button type="submit" variant="secondary" className="flex-1">Create account <HugeiconsIcon icon={ArrowRight01Icon} size={16} /></Button><Button type="reset" variant="outline">Cancel</Button></div>

@@ -99,8 +99,8 @@ export const DEFAULT_THEME_CSS = `:root {
 
 .dark {
   /* Surfaces */
-  --surface: #222222;
-  --surface-secondary: #1f1f1f;
+  --surface: #1f1f1f;
+  --surface-secondary: #222222;
   --surface-subtle: #2b2b2b;
   --surface-raised: #333333;
   --surface-overlay: color-mix(in srgb, #000000 60%, transparent);
