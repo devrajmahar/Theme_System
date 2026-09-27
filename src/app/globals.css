@@ -8,7 +8,7 @@
   --surface-secondary: #fafafa;
 
   /* Borders */
-  --border: #1414140f;
+  --border: #e7e9e6;
   --border-secondary: var(--border);
   --border-width: 0.5px;
   --input-fill: var(--surface-secondary);
@@ -18,26 +18,40 @@
   --text-primary: #333333;
   --text-secondary: #7B7B7B;
   --text-muted: #D1D1D1;
+  --text-positive: var(--positive);
+  --text-negative: var(--negative);
+  /* Text on interactive items (buttons, tabs, links). Keep these values in
+     step with --icon / --icon-active: normal text = normal icon colour,
+     hover/active text = active icon colour. They are separate tokens on
+     purpose, never point one at the other. */
+  --text-interactive: #646465;
+  --text-hover: #404040;
+  --text-active: #404040;
 
-  /* Interaction states */
-  --hover-bg: #14141409;
-  --active-bg: #1414140d;
+  /* Interaction states — fills for hovered / pressed controls.
+     Must stay visibly different from --border and --surface-secondary. */
+  --hover-bg: #f0f0f0;
+  --active-bg: #f0f0f0;
 
-  /* Icons */
-  --icon: #14141480;
-  --icon-active: #141414;
+  /* Icons — normal and hovered/pressed/selected */
+  --icon: #646465;
+  --icon-active: #404040;
+
+  /* Status — gains / losses, success / failure. Shared with the main platform. */
+  --positive: #089981;
+  --negative: #f7525f;
 
   /* Actions */
   --primary: #168ef7;
-  --primary-foreground: #fff;
-  --danger: #fb3748;
+  --primary-foreground: #ffffff;
+  --danger: #f7525f;
   --danger-foreground: #ffffff;
 
   /* Buttons */
   --button-fill: #333333;
 
   /* Focus */
-  --ring: #14141433;
+  --ring: color-mix(in srgb, #141414 20%, transparent);
 
   /* Radius */
   --radius-default: 8px;
@@ -56,7 +70,7 @@
   --surface-secondary: #181818;
 
   /* Borders */
-  --border: #f0f0f014;
+  --border: color-mix(in srgb, #f0f0f0 8%, transparent);
   --border-secondary: var(--border);
   --border-width: 0.5px;
   --input-fill: var(--surface-secondary);
@@ -65,27 +79,36 @@
   /* Text */
   --text-primary: #f0f0f0;
   --text-secondary: #AEAEB2;
-  --text-muted: #f0f0f05c;
+  --text-muted: color-mix(in srgb, #f0f0f0 36%, transparent);
+  --text-positive: var(--positive);
+  --text-negative: var(--negative);
+  --text-interactive: #c2c2c2;
+  --text-hover: #f0f0f0;
+  --text-active: #f0f0f0;
 
   /* Interaction states */
-  --hover-bg: #f0f0f014;
-  --active-bg: #f0f0f024;
+  --hover-bg: color-mix(in srgb, #f0f0f0 5%, transparent);
+  --active-bg: color-mix(in srgb, #f0f0f0 14%, transparent);
 
   /* Icons */
-  --icon: #f0f0f0a8;
+  --icon: #c2c2c2;
   --icon-active: #f0f0f0;
+
+  /* Status — gains / losses, success / failure. Shared with the main platform. */
+  --positive: #089981;
+  --negative: #f7525f;
 
   /* Actions */
   --primary: #168ef7;
-  --primary-foreground: #fff;
-  --danger: #fb3748;
+  --primary-foreground: #ffffff;
+  --danger: #f7525f;
   --danger-foreground: #ffffff;
 
   /* Buttons */
   --button-fill: #EBEBEB;
 
   /* Focus */
-  --ring: #f0f0f026;
+  --ring: color-mix(in srgb, #f0f0f0 15%, transparent);
 
   /* Chart */
   --bullish: #7c8db0;
@@ -151,16 +174,19 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-text-positive: var(--text-positive);
+  --color-text-negative: var(--text-negative);
+  --color-text-interactive: var(--text-interactive);
+  --color-text-hover: var(--text-hover);
+  --color-text-active: var(--text-active);
   --color-hover-bg: var(--hover-bg);
   --color-active-bg: var(--active-bg);
   --color-icon: var(--icon);
   --color-icon-active: var(--icon-active);
   --color-bullish: var(--bullish);
   --color-bearish: var(--bearish);
-  --shadow-fancy-neutral: var(--fancy-shadow-neutral);
-  --shadow-fancy-primary: var(--fancy-shadow-primary);
-  --shadow-fancy-destructive: var(--fancy-shadow-destructive);
-  --shadow-fancy-basic: var(--fancy-shadow-basic);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -179,7 +205,9 @@
   --font-sans: var(--font-inter);
 }
 
-* { border-color: var(--border); }
+/* Default border colour lives in the base layer so Tailwind utilities such as
+   `border-transparent` or `border-ring` can still override it. */
+@layer base { * { border-color: var(--border); } }
 html { color-scheme: light; scroll-behavior: smooth; }
 html.dark { color-scheme: dark; }
 body {
@@ -205,12 +233,59 @@ button:disabled { cursor: not-allowed; }
   background-color: var(--surface-secondary);
   border-color: var(--border-secondary);
 }
+/* State tints layer over the surface instead of replacing it, so hover
+   stays visible even when --hover-bg is close to --surface-secondary. */
 .ui-secondary:hover:not(:disabled) {
-  background-color: var(--hover-bg);
+  background-image: linear-gradient(var(--hover-bg), var(--hover-bg));
 }
 .ui-secondary:active:not(:disabled) {
-  background-color: var(--active-bg);
+  background-image: linear-gradient(var(--active-bg), var(--active-bg));
 }
+
+/* Tabs / segmented controls
+   Markup:
+     <div role="tablist" class="ui-tabs">
+       <button role="tab" class="ui-tab" aria-selected="true">Overview</button>
+       <button role="tab" class="ui-tab" aria-selected="false">Orders</button>
+     </div>
+
+   Rules:
+   - Track (.ui-tabs): --surface-secondary fill, NO border.
+   - Unselected tab (.ui-tab): no border, no fill, --text-interactive text.
+   - Hover / press on an unselected tab changes the TEXT only
+     (--text-hover / --text-active). Tabs never use --hover-bg / --active-bg.
+   - Selected tab (aria-selected="true"): the only bordered element. It is
+     raised onto --surface with a --border outline and --text-active text.
+   - Every tab keeps a transparent border of --border-width, so selecting
+     one never shifts the layout.
+
+   Do:    drive the selected state with aria-selected (not a class).
+   Don't: add Tailwind border / bg / text colour utilities to .ui-tabs or
+          .ui-tab — these rules own the look; add only layout and spacing. */
+.ui-tabs {
+  background-color: var(--surface-secondary);
+  border: 0;
+}
+.ui-tab {
+  border: var(--border-width) solid transparent;
+  color: var(--text-interactive);
+}
+.ui-tab:hover:not([aria-selected="true"]) {
+  color: var(--text-hover);
+}
+.ui-tab:active:not([aria-selected="true"]) {
+  color: var(--text-active);
+}
+.ui-tab[aria-selected="true"] {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: var(--text-active);
+}
+
+/* Fills stop at the inside edge of the border (padding-box). Without this,
+   hover/active fills paint underneath translucent borders and the border
+   looks like it "lights up" or disappears. Keep this rule. */
+button, .border { background-clip: padding-box; }
 
 /* Global border thickness — every `border*` width utility follows
    --border-width, so thickness retunes system-wide from one token. */
@@ -222,22 +297,4 @@ button:disabled { cursor: not-allowed; }
 @media (min-width: 1024px) {
   .lg\:border-l { border-left-width: var(--border-width); }
   .lg\:border-t-0 { border-top-width: 0; }
-}
-
-/* FancyButton — additive shadow tokens (existing theme untouched).
-   Gloss overlays are intentionally non-themeable (always white at low opacity).
-   Border rings come from the theme where possible (--primary/--danger);
-   neutral keeps its exact #242628 ring in both themes. */
-:root {
-  --fancy-shadow-neutral: 0 1px 2px 0 #1b1c1d7a, 0 0 0 1px #242628;
-  --fancy-shadow-primary: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--primary);
-  --fancy-shadow-destructive: 0 1px 2px 0 #0e121b3d, 0 0 0 1px var(--danger);
-  --fancy-shadow-basic: 0 1px 3px 0 #0e121b1f, 0 0 0 1px #ebebeb;
-}
-
-.dark {
-  --fancy-shadow-neutral: 0 1px 2px 0 #00000066, 0 0 0 1px #242628;
-  --fancy-shadow-primary: 0 1px 2px 0 #00000066, 0 0 0 1px var(--primary);
-  --fancy-shadow-destructive: 0 1px 2px 0 #00000066, 0 0 0 1px var(--danger);
-  --fancy-shadow-basic: 0 1px 3px 0 #00000055, 0 0 0 1px #262626;
 }
