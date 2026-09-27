@@ -67,8 +67,6 @@
   --primary-subtle: #e1f0ff;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
-  --danger-hover: #e7000b;
-  --danger-active: #c10007;
   --danger-disabled: #ffc9c9;
   --danger-disabled-foreground: #ffa2a2;
   --danger-ring: #ffc9c9;
@@ -163,8 +161,6 @@
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
-  --danger-hover: #e7000b;
-  --danger-active: #c10007;
   --danger-disabled: #9f0712;
   --danger-disabled-foreground: #ff6467;
   --danger-ring: #c10007;
@@ -249,8 +245,6 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-danger: var(--danger);
   --color-danger-foreground: var(--danger-foreground);
-  --color-danger-hover: var(--danger-hover);
-  --color-danger-active: var(--danger-active);
   --color-danger-disabled: var(--danger-disabled);
   --color-danger-disabled-foreground: var(--danger-disabled-foreground);
   --color-danger-ring: var(--danger-ring);

@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Add01Icon, ArrowRight01Icon, Calendar03Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
+import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
 import { BellIcon, CalendarIcon, ChatRoundDotsIcon, FolderIcon, HomeIcon, LetterIcon, MagnifierIcon, SettingsIcon, UserIcon as SolarUserIcon } from "@solar-icons/react/bold";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PalettePlayground } from "@/components/palette-playground";
@@ -16,6 +16,8 @@ export default function Home() {
   const [activeNav, setActiveNav] = useState("Overview");
   const [tab, setTab] = useState("Components");
   return <div className="min-h-screen bg-surface text-text-primary">
+    {/* Announcement banner: --negative-subtle fill, --text-negative text. Sits above the sticky header and scrolls away. */}
+    <div role="status" className="flex min-h-9 items-center justify-center gap-2 bg-negative-subtle px-4 py-2 text-center text-[13px] font-medium leading-4 text-text-negative"><HugeiconsIcon icon={AlertCircleIcon} size={14} className="shrink-0" /><span>Scheduled maintenance on Sunday, 02:00–04:00 UTC — trading may be briefly unavailable.</span></div>
     <header className="sticky top-0 z-40 border-b bg-surface/90 backdrop-blur-xl"><div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-4 sm:px-6"><div className="flex items-center gap-3"><div className="grid size-7 place-items-center rounded-default bg-primary text-xs font-bold text-primary-foreground">T</div><span className="text-sm font-semibold">Theme Studio</span><Badge variant="secondary" className="hidden sm:inline-flex">shadcn/ui</Badge></div><div className="flex items-center gap-2"><a href="#editor" className="hidden text-sm text-text-secondary hover:text-text-primary sm:block">Edit CSS</a><ThemeToggle /></div></div></header>
     <main className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 sm:py-10">
       <section className="section-enter mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"><div className="max-w-2xl"><Badge variant="outline">Clean state tokens</Badge><h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Test your theme on real UI.</h1><p className="mt-3 text-base leading-7 text-text-secondary">A focused theme playground with concise, purposeful tokens. Edit surfaces, type, states, icons, actions, and radius without shadcn implementation noise.</p></div><div className="flex gap-2"><Button variant="outline" onClick={() => document.querySelector("#editor")?.scrollIntoView()}><HugeiconsIcon icon={Search01Icon} size={17} /> Inspect tokens</Button><Button variant="secondary" onClick={() => document.querySelector("#editor")?.scrollIntoView()}><HugeiconsIcon icon={Add01Icon} size={17} /> Customize</Button></div></section>

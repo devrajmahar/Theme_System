@@ -2,14 +2,15 @@ import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNo
 
 // Mirrors Conduit's Button: default = neutral fill, secondary = brand blue,
 // outline = surface + border, ghost = text only. Focus is a 2px outline.
+// Hover/press change the fill only — no hover shadow (our choice; Conduit adds shadow-1).
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid";
 export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive"; size?: "default" | "sm" | "lg" | "icon" }) {
   const variants = {
     default: `border-transparent bg-button-fill text-button-fill-foreground hover:bg-button-fill-hover active:bg-button-fill-active disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
     secondary: `border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled disabled:text-primary-disabled-foreground ${focusRing} focus-visible:outline-primary-ring`,
-    outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg hover:shadow-1 active:border-transparent active:bg-active-bg active:shadow-1 disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    ghost: `border-transparent text-text-default hover:bg-hover-bg hover:shadow-1 active:bg-active-bg active:shadow-1 disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-active disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing} focus-visible:outline-danger-ring`,
+    outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg active:border-transparent active:bg-active-bg disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
+    ghost: `border-transparent text-text-default hover:bg-hover-bg active:bg-active-bg disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
+    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85 disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing} focus-visible:outline-danger-ring`,
   };
   const sizes = {
     sm: "h-6 gap-1 rounded-button px-2 text-xs leading-[14px] [&_svg]:size-3.5",
