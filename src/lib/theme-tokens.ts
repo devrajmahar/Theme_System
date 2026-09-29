@@ -92,6 +92,15 @@ export const DEFAULT_THEME_CSS = `:root {
   --sell-ring: #ffc9c9;
   --sell-foreground: #ffffff;
 
+  /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill).
+     Flash is the brief highlight when a level's size changes. */
+  --book-bid-fill: #e0f3ef;
+  --book-bid-flash: #d2efe9;
+  --book-bid-text: #067a66;
+  --book-ask-fill: #fdeef0;
+  --book-ask-flash: #fce4e7;
+  --book-ask-text: #d91a2b;
+
   /* Focus */
   --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
 
@@ -203,6 +212,15 @@ export const DEFAULT_THEME_CSS = `:root {
   --sell-ring: #a3303a;
   --sell-foreground: #ffffff;
 
+  /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill).
+     Flash is the brief highlight when a level's size changes. */
+  --book-bid-fill: #16332e;
+  --book-bid-flash: #1c4640;
+  --book-bid-text: #22c3a6;
+  --book-ask-fill: #3a2124;
+  --book-ask-flash: #4e2a2e;
+  --book-ask-text: #ff6b76;
+
   /* Focus */
   --ring: color-mix(in srgb, #404040 50%, transparent);
 
@@ -220,6 +238,7 @@ export const TOKEN_GROUPS = [
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },
   { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-ring", "primary-subtle", "primary-foreground", "danger", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
   { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-ring", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-ring", "sell-foreground"] },
+  { label: "Order book", tokens: ["book-bid-fill", "book-bid-flash", "book-bid-text", "book-ask-fill", "book-ask-flash", "book-ask-text"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
   { label: "Chart", tokens: ["bullish", "bearish"] },
   { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-button"] },
