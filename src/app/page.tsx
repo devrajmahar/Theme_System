@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
+import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CheckmarkCircle02Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
 import { BellIcon, CalendarIcon, ChatRoundDotsIcon, FolderIcon, HomeIcon, LetterIcon, MagnifierIcon, SettingsIcon, UserIcon as SolarUserIcon } from "@solar-icons/react/bold";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PalettePlayground } from "@/components/palette-playground";
@@ -16,8 +16,10 @@ export default function Home() {
   const [activeNav, setActiveNav] = useState("Overview");
   const [tab, setTab] = useState("Components");
   return <div className="min-h-screen bg-surface text-text-primary">
-    {/* Announcement banner: --negative-subtle fill, --text-negative text. Sits above the sticky header and scrolls away. */}
+    {/* Announcement banners: --negative-subtle fill, --text-negative text. Sits above the sticky header and scrolls away. */}
     <div role="status" className="flex min-h-9 items-center justify-center gap-2 bg-negative-subtle px-4 py-2 text-center text-[13px] font-medium leading-4 text-text-negative"><HugeiconsIcon icon={AlertCircleIcon} size={14} className="shrink-0" /><span>Scheduled maintenance on Sunday, 02:00–04:00 UTC — trading may be briefly unavailable.</span></div>
+    {/* Positive counterpart: --positive-subtle fill, --text-positive text. */}
+    <div role="status" className="flex min-h-9 items-center justify-center gap-2 bg-positive-subtle px-4 py-2 text-center text-[13px] font-medium leading-4 text-text-positive"><HugeiconsIcon icon={CheckmarkCircle02Icon} size={14} className="shrink-0" /><span>All systems operational — deposits and withdrawals are processing normally.</span></div>
     <header className="sticky top-0 z-40 border-b bg-surface/90 backdrop-blur-xl"><div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-4 sm:px-6"><div className="flex items-center gap-3"><div className="grid size-7 place-items-center rounded-default bg-primary text-xs font-bold text-primary-foreground">T</div><span className="text-sm font-semibold">Theme Studio</span><Badge variant="secondary" className="hidden sm:inline-flex">shadcn/ui</Badge></div><div className="flex items-center gap-2"><a href="#editor" className="hidden text-sm text-text-secondary hover:text-text-primary sm:block">Edit CSS</a><ThemeToggle /></div></div></header>
     <main className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 sm:py-10">
       <section className="section-enter mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between"><div className="max-w-2xl"><Badge variant="outline">Clean state tokens</Badge><h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Test your theme on real UI.</h1><p className="mt-3 text-base leading-7 text-text-secondary">A focused theme playground with concise, purposeful tokens. Edit surfaces, type, states, icons, actions, and radius without shadcn implementation noise.</p></div><div className="flex gap-2"><Button variant="outline" onClick={() => document.querySelector("#editor")?.scrollIntoView()}><HugeiconsIcon icon={Search01Icon} size={17} /> Inspect tokens</Button><Button variant="secondary" onClick={() => document.querySelector("#editor")?.scrollIntoView()}><HugeiconsIcon icon={Add01Icon} size={17} /> Customize</Button></div></section>
@@ -121,7 +123,7 @@ function CandlestickPreview() {
   );
 }
 
-function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="p-2"><p className="truncate font-mono text-[10px]">--{token}</p></div></div>)}</div></CardContent></Card></div>; }
+function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","bullish","bearish","ring"]; const values = useTokenValues(colors); return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="space-y-0.5 p-2"><p className="truncate font-mono text-[10px]">--{token}</p><p className="truncate font-mono text-[10px] text-text-secondary" title={values[token]}>{values[token] || " "}</p></div></div>)}</div></CardContent></Card></div>; }
 
 // Auth form: the card sits on --surface like the page; inputs sit on --surface-secondary.
 // Submitting empty/invalid fields sets aria-invalid (danger border + 3px danger/20 ring) and shows a FieldError.
@@ -143,4 +145,31 @@ function SignUpCard() {
     <div className="space-y-2"><Label>Password</Label><Input name="password" type="password" placeholder="At least 8 characters" aria-invalid={errors.password ? true : undefined} onChange={() => errors.password && setErrors((prev) => ({ ...prev, password: undefined }))} />{errors.password && <FieldError>{errors.password}</FieldError>}</div>
     <div className="flex gap-2"><Button type="submit" variant="secondary" className="flex-1">Create account <HugeiconsIcon icon={ArrowRight01Icon} size={16} /></Button><Button type="reset" variant="outline">Cancel</Button></div>
   </form></CardContent></Card>;
+}
+
+// Resolved value of each CSS custom property for the current theme. Re-reads when the theme
+// class flips or the live CSS editor rewrites its <style>, so the tiles always show what renders.
+function useTokenValues(tokens: string[]) {
+  const [values, setValues] = useState<Record<string, string>>({});
+  const key = tokens.join(",");
+  useEffect(() => {
+    const names = key.split(",");
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const read = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const styles = getComputedStyle(document.documentElement);
+        setValues(Object.fromEntries(names.map((name) => [name, styles.getPropertyValue(`--${name}`).trim()])));
+      }, 0);
+    };
+    read();
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "style"] });
+    observer.observe(document.body, { subtree: true, childList: true, characterData: true });
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [key]);
+  return values;
 }

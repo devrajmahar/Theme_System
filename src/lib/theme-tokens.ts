@@ -44,7 +44,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Status — gains / losses, success / failure. Shared with the main platform. */
   --positive: #089981;
-  --positive-subtle: #dbfce7;
+  --positive-subtle: #dcf5f0;
   --negative: #f7525f;
   --negative-subtle: #ffe2e2;
   --warning: #ff6900;
@@ -139,9 +139,9 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Status — gains / losses, success / failure. Shared with the main platform. */
   --positive: #089981;
-  --positive-subtle: #0d542b;
+  --positive-subtle: #193c37;
   --negative: #f7525f;
-  --negative-subtle: #460809;
+  --negative-subtle: #532b2e;
   --warning: #ff6900;
   --warning-subtle: #7e2a0c;
   --indigo: #615fff;
