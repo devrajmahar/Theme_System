@@ -1,5 +1,5 @@
 // Generates every icon in public/brand-assets/icons/ from the source SVGs in public/brand-assets/.
-// Run: npm run icons  (uses sharp, which ships with Next.js). See public/brand-assets/USAGE.md.
+// Run: npm run icons  (uses sharp, which ships with Next.js). See public/brand-assets/usage.md.
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -15,7 +15,7 @@ fs.mkdirSync(out, { recursive: true });
 // The source mark lives on a 40-unit square; at small sizes its edges land between pixels (e.g. 4.4px)
 // and anti-alias into grey. This rebuilds the same shape for an S-px grid: square edges and arrow bars
 // snap to whole pixels, bar thickness stays a whole number of pixels, and only the 45° diagonal is
-// anti-aliased. Geometry (40-unit space, y from the square's top — matches Logomark-*.svg):
+// anti-aliased. Geometry (40-unit space, y from the square's top — matches logomark-*.svg):
 // top bar x 11–29.5, y 10.5–15.5; vertical bar x 24.5–29.5, y 10.5–29; diagonal centred on x+y=40,
 // width 5, capped at x−y=−18; top-right outer corner radius 2.5; square corner radius 8.
 // The favicon's square uses the dark-theme --surface from globals.css (not the source mark's near-black),
@@ -55,7 +55,7 @@ const adaptive = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
 `;
 
 // ── App icons: main logo ────────────────────────────────────────────────────────────────────────
-const logo = fs.readFileSync(path.join(brand, "Logo.svg"));
+const logo = fs.readFileSync(path.join(brand, "logo.svg"));
 const APP_ID = "aeris", APP_NAME = "Aeris"; // file names and display name for app icons
 const LOGO_BG = "#262626"; // Logo's tile colour — used where the OS needs an opaque, full-bleed square.
 // Full-bleed home-screen icon: Logo's tile colour + highlight gradient fill the whole square (the OS
@@ -126,13 +126,13 @@ w("site.webmanifest", JSON.stringify({ name: APP_NAME, short_name: APP_NAME, ico
 ], theme_color: LOGO_BG, background_color: LOGO_BG, display: "standalone" }, null, 2) + "\n");
 
 // ── Desktop — main logo only (never the logomark) ───────────────────────────────────────────────
-// Windows and Linux use Logo.svg as drawn. macOS (Big Sur+) expects the tile at 824/1024 of the canvas,
+// Windows and Linux use logo.svg as drawn. macOS (Big Sur+) expects the tile at 824/1024 of the canvas,
 // centred, with room for its shadow; Logo as drawn fills ~89% and would look oversized in the Dock.
 const TILE_MAC = 824 / 1024;
 const framed = (tileFraction) => { // Logo re-framed so its 48-unit tile (x 3–51, y 0–48) fills `tileFraction`, centred
   const u = 48 / tileFraction, x = 27 - u / 2, y = 24 - u / 2, f = (n) => +n.toFixed(4);
   const svg = logoSrc.replace('width="54" height="54" viewBox="0 0 54 54"', `viewBox="${f(x)} ${f(y)} ${f(u)} ${f(u)}"`);
-  if (svg === logoSrc) throw new Error("Logo.svg root attributes changed; update framed()");
+  if (svg === logoSrc) throw new Error("logo.svg root attributes changed; update framed()");
   return svg;
 };
 const macSvg = framed(TILE_MAC);
@@ -145,11 +145,11 @@ for (const s of [16, 20, 22, 24, 30, 32, 36, 40, 44, 48, 64, 96, 128, 256, 512, 
 // Windows: .ico with every size Explorer, taskbar, Start, Alt-Tab and title bars pick at 100–400 % scaling
 w(`desktop/windows/${APP_ID}.ico`, await ico(await each([16, 20, 24, 30, 32, 36, 40, 48, 60, 64, 72, 80, 96, 128, 256], l)));
 // Windows: Microsoft Store / MSIX / WinUI tile assets (names match Tauri and Visual Studio defaults)
-for (const [name, s] of [["Square30x30Logo", 30], ["Square44x44Logo", 44], ["Square71x71Logo", 71], ["Square89x89Logo", 89], ["Square107x107Logo", 107], ["Square142x142Logo", 142], ["Square150x150Logo", 150], ["Square284x284Logo", 284], ["Square310x310Logo", 310], ["StoreLogo", 50]]) w(`desktop/windows/store/${name}.png`, await l(s));
+for (const [name, s] of [["square-30x30-logo", 30], ["square-44x44-logo", 44], ["square-71x71-logo", 71], ["square-89x89-logo", 89], ["square-107x107-logo", 107], ["square-142x142-logo", 142], ["square-150x150-logo", 150], ["square-284x284-logo", 284], ["square-310x310-logo", 310], ["store-logo", 50]]) w(`desktop/windows/store/${name}.png`, await l(s));
 
-// macOS: AppIcon.iconset (what Xcode and `iconutil -c icns` use) + .icns built from the same images
+// macOS: aeris.iconset (what Xcode and `iconutil -c icns` use) + .icns built from the same images
 const ICONSET = [["icon_16x16", 16], ["icon_16x16@2x", 32], ["icon_32x32", 32], ["icon_32x32@2x", 64], ["icon_128x128", 128], ["icon_128x128@2x", 256], ["icon_256x256", 256], ["icon_256x256@2x", 512], ["icon_512x512", 512], ["icon_512x512@2x", 1024]];
-for (const [name, s] of ICONSET) w(`desktop/macos/AppIcon.iconset/${name}.png`, await mac(s));
+for (const [name, s] of ICONSET) w(`desktop/macos/aeris.iconset/${name}.png`, await mac(s));
 w(`desktop/macos/${APP_ID}.icns`, icns([["ic11", 32], ["ic12", 64], ["ic07", 128], ["ic08", 256], ["ic13", 256], ["ic09", 512], ["ic14", 512], ["ic10", 1024]].map(([type, s]) => ({ type, buf: cache.mac[s] }))));
 w(`desktop/macos/${APP_ID}-1024.png`, await mac(1024));
 

@@ -10,7 +10,7 @@ const ICONS = "/brand-assets/icons";
 // own colours (fixed, not theme tokens). The icon is the file engines read from <link rel="icon">,
 // cropped to the engine's container. The mark's arrow is a hole, so `backing` is what shows through it.
 const FAVICON = `${ICONS}/favicon/favicon-96.png`; // same art as favicon.ico / favicon.svg (light)
-const OLD = "/brand-assets/Logo.svg";
+const OLD = "/brand-assets/logo.svg";
 type Tone = "light" | "dark";
 
 const ENGINES = {
@@ -62,7 +62,7 @@ export function SearchPreview() {
       <Labeled label="Google · mobile · light"><Result engine="google" tone="light" compact /></Labeled>
       <Labeled label="Google · mobile · dark"><Result engine="google" tone="dark" compact /></Labeled>
       <Labeled label="Dark · no icon backing at all: arrow still reads"><Result engine="google" tone="dark" compact backing="transparent" /></Labeled>
-      <Labeled label="Logo.svg (old) · padding and shadow get sliced" bad><Result engine="google" tone="light" compact icon={OLD} /></Labeled>
+      <Labeled label="logo.svg (old) · padding and shadow get sliced" bad><Result engine="google" tone="light" compact icon={OLD} /></Labeled>
     </div>
   </CardContent></Card>;
 }
@@ -180,14 +180,14 @@ async function runChecks(): Promise<Check[]> {
       return `valid JSON · name "${m.name}" · ${m.icons.length} icons, sizes match files · maskable present`;
     }),
     icoFile("Windows", `${ICONS}/desktop/windows/aeris.ico`, [16, 20, 24, 30, 32, 36, 40, 48, 60, 64, 72, 80, 96, 128, 256]),
-    ...([["Square30x30Logo", 30], ["Square44x44Logo", 44], ["Square71x71Logo", 71], ["Square89x89Logo", 89], ["Square107x107Logo", 107], ["Square142x142Logo", 142], ["Square150x150Logo", 150], ["Square284x284Logo", 284], ["Square310x310Logo", 310], ["StoreLogo", 50]] as const).map(([n, s]) => pngFile("Windows", `${ICONS}/desktop/windows/store/${n}.png`, s, false)),
+    ...([["square-30x30-logo", 30], ["square-44x44-logo", 44], ["square-71x71-logo", 71], ["square-89x89-logo", 89], ["square-107x107-logo", 107], ["square-142x142-logo", 142], ["square-150x150-logo", 150], ["square-284x284-logo", 284], ["square-310x310-logo", 310], ["store-logo", 50]] as const).map(([n, s]) => pngFile("Windows", `${ICONS}/desktop/windows/store/${n}.png`, s, false)),
     add("macOS", "aeris.icns", async () => {
       const { buf } = await get(`${ICONS}/desktop/macos/aeris.icns`); const c = icns(buf), bad = c.filter((x) => !x.ok);
       need(!bad.length, `bad chunk ${bad.map((x) => `${x.type} (${x.px}px)`).join(", ")}`);
       const missing = Object.keys(ICNS_SIZE).filter((t) => !c.some((x) => x.type === t)); need(!missing.length, `missing ${missing.join(", ")}`);
       return `ICNS · ${c.map((x) => x.type).join(" ")} · iconutil chunk types, PNG, sizes match`;
     }),
-    ...([["icon_16x16", 16], ["icon_16x16@2x", 32], ["icon_32x32", 32], ["icon_32x32@2x", 64], ["icon_128x128", 128], ["icon_128x128@2x", 256], ["icon_256x256", 256], ["icon_256x256@2x", 512], ["icon_512x512", 512], ["icon_512x512@2x", 1024]] as const).map(([n, s]) => pngFile("macOS", `${ICONS}/desktop/macos/AppIcon.iconset/${n}.png`, s, false)),
+    ...([["icon_16x16", 16], ["icon_16x16@2x", 32], ["icon_32x32", 32], ["icon_32x32@2x", 64], ["icon_128x128", 128], ["icon_128x128@2x", 256], ["icon_256x256", 256], ["icon_256x256@2x", 512], ["icon_512x512", 512], ["icon_512x512@2x", 1024]] as const).map(([n, s]) => pngFile("macOS", `${ICONS}/desktop/macos/aeris.iconset/${n}.png`, s, false)),
     add("macOS", "Apple icon grid (824 / 1024)", async () => {
       // Measure the opaque tile across the middle row of the 1024 master: ~824 px wide, centred.
       const bmp = await createImageBitmap(await (await fetch(`${ICONS}/desktop/macos/aeris-1024.png`, { cache: "no-store" })).blob());

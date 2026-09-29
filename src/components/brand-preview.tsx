@@ -42,10 +42,10 @@ function BrowserTab({ tone }: { tone: "light" | "dark" }) {
 
 const DOWNLOADS: { group: string; files: { name: string; path: string; note: string }[] }[] = [
   { group: "Source", files: [
-    { name: "USAGE.md", path: "/brand-assets/USAGE.md", note: "Which logo goes where — read first" },
-    { name: "Logo.svg", path: "/brand-assets/Logo.svg", note: "Primary logo" },
-    { name: "Logomark-dark.svg", path: "/brand-assets/Logomark-dark.svg", note: "Mark for light backgrounds" },
-    { name: "Logomark-white.svg", path: "/brand-assets/Logomark-white.svg", note: "Mark for dark backgrounds" },
+    { name: "usage.md", path: "/brand-assets/usage.md", note: "Which logo goes where — read first" },
+    { name: "logo.svg", path: "/brand-assets/logo.svg", note: "Primary logo" },
+    { name: "logomark-dark.svg", path: "/brand-assets/logomark-dark.svg", note: "Mark for light backgrounds" },
+    { name: "logomark-white.svg", path: "/brand-assets/logomark-white.svg", note: "Mark for dark backgrounds" },
   ] },
   { group: "Web", files: [
     { name: "favicon.ico", path: `${ICONS}/favicon.ico`, note: "Dark + white arrow · 16–64" },
@@ -59,9 +59,9 @@ const DOWNLOADS: { group: string; files: { name: string; path: string; note: str
   ] },
   { group: "Desktop", files: [
     { name: "windows/aeris.ico", path: `${ICONS}/desktop/windows/aeris.ico`, note: "Logo · Windows · 15 sizes, 16–256" },
-    { name: "windows/store/Square150x150Logo.png", path: `${ICONS}/desktop/windows/store/Square150x150Logo.png`, note: "Logo · Store / MSIX tiles · 10 files in store/" },
+    { name: "windows/store/square-150x150-logo.png", path: `${ICONS}/desktop/windows/store/square-150x150-logo.png`, note: "Logo · Store / MSIX tiles · 10 files in store/" },
     { name: "macos/aeris.icns", path: `${ICONS}/desktop/macos/aeris.icns`, note: "Logo · macOS · Apple 824/1024 grid" },
-    { name: "macos/aeris-1024.png", path: `${ICONS}/desktop/macos/aeris-1024.png`, note: "Logo · macOS master · AppIcon.iconset/ alongside" },
+    { name: "macos/aeris-1024.png", path: `${ICONS}/desktop/macos/aeris-1024.png`, note: "Logo · macOS master · aeris.iconset/ alongside" },
     { name: "linux/hicolor/scalable/apps/aeris.svg", path: `${ICONS}/desktop/linux/hicolor/scalable/apps/aeris.svg`, note: "Logo · Linux hicolor · 16–512 + SVG" },
     { name: "png/1024x1024.png", path: `${ICONS}/desktop/png/1024x1024.png`, note: "Logo · generic PNGs 16–1024 in png/" },
   ] },
@@ -70,15 +70,15 @@ const DOWNLOADS: { group: string; files: { name: string; path: string; note: str
 export function BrandPreview() {
   return <div className="grid gap-4">
     <div className="grid gap-4 lg:grid-cols-2">
-      <Card><CardHeader><CardTitle>Primary logo</CardTitle><CardDescription>Logo.svg — the full app-icon lockup with depth and highlight.</CardDescription></CardHeader><CardContent>
+      <Card><CardHeader><CardTitle>Primary logo</CardTitle><CardDescription>logo.svg — the full app-icon lockup with depth and highlight.</CardDescription></CardHeader><CardContent>
         <div className="grid grid-cols-2 gap-3">
-          {(["light", "dark"] as const).map((tone) => <div key={tone}><Stage tone={tone} className="h-40 gap-6">{[32, 54, 96].map((s) => <img key={s} src="/brand-assets/Logo.svg" alt="Logo" width={s} height={s} />)}</Stage><Caption>On {tone} · 32 / 54 / 96 px</Caption></div>)}
+          {(["light", "dark"] as const).map((tone) => <div key={tone}><Stage tone={tone} className="h-40 gap-6">{[32, 54, 96].map((s) => <img key={s} src="/brand-assets/logo.svg" alt="Logo" width={s} height={s} />)}</Stage><Caption>On {tone} · 32 / 54 / 96 px</Caption></div>)}
         </div>
       </CardContent></Card>
       <Card><CardHeader><CardTitle>Logomark</CardTitle><CardDescription>Dark mark on light surfaces, white mark on dark surfaces.</CardDescription></CardHeader><CardContent>
         <div className="grid grid-cols-2 gap-3">
-          <div><Stage tone="light" className="h-40 gap-6">{[20, 32, 64].map((s) => <img key={s} src="/brand-assets/Logomark-dark.svg" alt="Logomark" height={s} style={{ height: s, width: "auto" }} />)}</Stage><Caption>Logomark-dark.svg</Caption></div>
-          <div><Stage tone="dark" className="h-40 gap-6">{[20, 32, 64].map((s) => <img key={s} src="/brand-assets/Logomark-white.svg" alt="Logomark" height={s} style={{ height: s, width: "auto" }} />)}</Stage><Caption>Logomark-white.svg</Caption></div>
+          <div><Stage tone="light" className="h-40 gap-6">{[20, 32, 64].map((s) => <img key={s} src="/brand-assets/logomark-dark.svg" alt="Logomark" height={s} style={{ height: s, width: "auto" }} />)}</Stage><Caption>logomark-dark.svg</Caption></div>
+          <div><Stage tone="dark" className="h-40 gap-6">{[20, 32, 64].map((s) => <img key={s} src="/brand-assets/logomark-white.svg" alt="Logomark" height={s} style={{ height: s, width: "auto" }} />)}</Stage><Caption>logomark-white.svg</Caption></div>
         </div>
       </CardContent></Card>
     </div>
@@ -93,15 +93,15 @@ export function BrandPreview() {
     <SearchPreview />
 
     <div className="grid gap-4 lg:grid-cols-2">
-      <Card><CardHeader><CardTitle>Home screen</CardTitle><CardDescription>Logo.svg — apple-touch-icon.png and icon-maskable-512.png under the masks iOS and Android apply.</CardDescription></CardHeader><CardContent>
+      <Card><CardHeader><CardTitle>Home screen</CardTitle><CardDescription>logo.svg — apple-touch-icon.png and icon-maskable-512.png under the masks iOS and Android apply.</CardDescription></CardHeader><CardContent>
         <div className="grid grid-cols-2 gap-3">
           <div><Stage tone="light" className="h-44 gap-5" ><div className="flex flex-col items-center gap-1.5"><img src={`${ICONS}/apple-touch-icon.png`} alt="" width={60} height={60} className="rounded-[22.5%]" /><span className="text-[11px]" style={{ color: "#1f1f1f" }}>Aeris</span></div></Stage><Caption>iOS · rounded by the system</Caption></div>
           <div><Stage tone="dark" className="h-44 gap-4">{["rounded-full", "rounded-[30%]", "rounded-[12%]"].map((mask) => <img key={mask} src={`${ICONS}/icon-maskable-512.png`} alt="" width={48} height={48} className={mask} />)}</Stage><Caption>Android · circle, squircle, rounded square</Caption></div>
         </div>
       </CardContent></Card>
-      <Card><CardHeader><CardTitle>Desktop</CardTitle><CardDescription>Logo.svg — macOS icon (Apple 824/1024 grid) in the Dock, Windows aeris.ico in the taskbar.</CardDescription></CardHeader><CardContent>
+      <Card><CardHeader><CardTitle>Desktop</CardTitle><CardDescription>logo.svg — macOS icon (Apple 824/1024 grid) in the Dock, Windows aeris.ico in the taskbar.</CardDescription></CardHeader><CardContent>
         <div className="grid gap-3">
-          <Stage tone="light" className="h-20" ><div className="flex items-end gap-3 rounded-2xl border px-3 py-2" style={{ background: "rgba(245,245,245,0.9)", borderColor: "#e5e5e5" }}>{[0, 1].map((i) => <span key={i} className="size-11 rounded-[22%]" style={{ background: "#d4d4d4" }} />)}<div className="flex flex-col items-center"><img src={`${ICONS}/desktop/macos/AppIcon.iconset/icon_32x32@2x.png`} srcSet={`${ICONS}/desktop/macos/AppIcon.iconset/icon_32x32@2x.png 1x, ${ICONS}/desktop/macos/AppIcon.iconset/icon_128x128.png 2x`} alt="" width={44} height={44} /><span className="mt-1 size-1 rounded-full" style={{ background: "#404040" }} /></div>{[0].map((i) => <span key={i} className="size-11 rounded-[22%]" style={{ background: "#d4d4d4" }} />)}</div></Stage>
+          <Stage tone="light" className="h-20" ><div className="flex items-end gap-3 rounded-2xl border px-3 py-2" style={{ background: "rgba(245,245,245,0.9)", borderColor: "#e5e5e5" }}>{[0, 1].map((i) => <span key={i} className="size-11 rounded-[22%]" style={{ background: "#d4d4d4" }} />)}<div className="flex flex-col items-center"><img src={`${ICONS}/desktop/macos/aeris.iconset/icon_32x32@2x.png`} srcSet={`${ICONS}/desktop/macos/aeris.iconset/icon_32x32@2x.png 1x, ${ICONS}/desktop/macos/aeris.iconset/icon_128x128.png 2x`} alt="" width={44} height={44} /><span className="mt-1 size-1 rounded-full" style={{ background: "#404040" }} /></div>{[0].map((i) => <span key={i} className="size-11 rounded-[22%]" style={{ background: "#d4d4d4" }} />)}</div></Stage>
           <Stage tone="dark" className="h-20 items-end p-0"><div className="flex h-12 w-full items-center justify-center gap-1" style={{ background: "#2b2b2b" }}>{[0, 1].map((i) => <span key={i} className="grid size-10 place-items-center"><span className="size-6 rounded" style={{ background: "#525252" }} /></span>)}<span className="grid size-10 place-items-center rounded" style={{ background: "#3a3a3a" }}><img src={`${ICONS}/desktop/png/24x24.png`} srcSet={`${ICONS}/desktop/png/24x24.png 1x, ${ICONS}/desktop/png/30x30.png 1.25x, ${ICONS}/desktop/png/36x36.png 1.5x, ${ICONS}/desktop/png/48x48.png 2x`} alt="" width={24} height={24} /></span><span className="grid size-10 place-items-center"><span className="size-6 rounded" style={{ background: "#525252" }} /></span></div></Stage>
         </div>
       </CardContent></Card>
