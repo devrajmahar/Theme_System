@@ -76,6 +76,22 @@ export const DEFAULT_THEME_CSS = `:root {
   --button-fill-foreground: #ffffff;
   --button-fill-subtle: #f5f5f5;
 
+  /* Trade — dedicated buy / sell buttons. Hover and press darken the fill; no shadows. */
+  --buy: #089981;
+  --buy-hover: #07876f;
+  --buy-active: #056f5c;
+  --buy-disabled: #b3e3da;
+  --buy-disabled-foreground: #5cbfae;
+  --buy-ring: #b3e3da;
+  --buy-foreground: #ffffff;
+  --sell: #f7525f;
+  --sell-hover: #e5404d;
+  --sell-active: #c9303c;
+  --sell-disabled: #ffc9c9;
+  --sell-disabled-foreground: #ffa2a2;
+  --sell-ring: #ffc9c9;
+  --sell-foreground: #ffffff;
+
   /* Focus */
   --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
 
@@ -171,6 +187,22 @@ export const DEFAULT_THEME_CSS = `:root {
   --button-fill-foreground: #404040;
   --button-fill-subtle: #222222;
 
+  /* Trade — dedicated buy / sell buttons. Hover and press brighten the fill; no shadows. */
+  --buy: #089981;
+  --buy-hover: #0aad92;
+  --buy-active: #0bc0a2;
+  --buy-disabled: #0f4a41;
+  --buy-disabled-foreground: #3f9e8e;
+  --buy-ring: #0a6b5b;
+  --buy-foreground: #ffffff;
+  --sell: #f7525f;
+  --sell-hover: #f96a75;
+  --sell-active: #fb838c;
+  --sell-disabled: #5c2328;
+  --sell-disabled-foreground: #c7535c;
+  --sell-ring: #a3303a;
+  --sell-foreground: #ffffff;
+
   /* Focus */
   --ring: color-mix(in srgb, #404040 50%, transparent);
 
@@ -187,6 +219,7 @@ export const TOKEN_GROUPS = [
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },
   { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-ring", "primary-subtle", "primary-foreground", "danger", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
+  { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-ring", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-ring", "sell-foreground"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
   { label: "Chart", tokens: ["bullish", "bearish"] },
   { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-button"] },

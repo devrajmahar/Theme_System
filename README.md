@@ -46,3 +46,7 @@ Defined in `src/app/globals.css` as CSS variables, also mapped to Tailwind utili
 Use `.ui-interactive` and `.ui-icon` for hover/active/disabled icon button behavior. Use `.ui-primary` or `bg-primary` for primary action buttons.
 
 Keyboard focus matches shared CN: soft **box-shadow glow** `0 0 0 3px` at **50% ring opacity** (no hard offset ring). Tab to preview.
+
+## Brand assets
+
+Logos live in `public/brand-assets/`. **Read [`public/brand-assets/USAGE.md`](public/brand-assets/USAGE.md) before using any logo or icon**: it says which file goes where (favicon, Google, desktop, home screen, in-app UI) and what not to do. Icons in `public/brand-assets/icons/` are generated; rebuild them with `npm run icons`.

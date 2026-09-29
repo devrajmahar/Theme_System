@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Theme Studio — shadcn Theme Playground",
+  title: "Aeris — Theme Studio",
   description: "Live hex theme editor and shadcn component preview",
 };
 
