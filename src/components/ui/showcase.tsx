@@ -10,7 +10,7 @@ export function Button({ variant = "default", size = "default", className = "", 
     secondary: `border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled disabled:text-primary-disabled-foreground ${focusRing} focus-visible:outline-primary-ring`,
     outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg active:border-transparent active:bg-active-bg disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
     ghost: `border-transparent text-text-default hover:bg-hover-bg active:bg-active-bg disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger/90 active:bg-danger/85 disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing} focus-visible:outline-danger-ring`,
+    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-active disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing} focus-visible:outline-danger-ring`,
     buy: `border-transparent bg-buy text-buy-foreground hover:bg-buy-hover active:bg-buy-active disabled:bg-buy-disabled disabled:text-buy-disabled-foreground ${focusRing} focus-visible:outline-buy-ring`,
     sell: `border-transparent bg-sell text-sell-foreground hover:bg-sell-hover active:bg-sell-active disabled:bg-sell-disabled disabled:text-sell-disabled-foreground ${focusRing} focus-visible:outline-sell-ring`,
   };

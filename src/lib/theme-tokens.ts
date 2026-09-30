@@ -64,6 +64,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-subtle: #e1f0ff;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
+  --danger-hover: #e5404d;
+  --danger-active: #c9303c;
   --danger-disabled: #ffc9c9;
   --danger-disabled-foreground: #ffa2a2;
   --danger-ring: #ffc9c9;
@@ -184,6 +186,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
+  --danger-hover: #f96a75;
+  --danger-active: #fb838c;
   --danger-disabled: #9f0712;
   --danger-disabled-foreground: #ff6467;
   --danger-ring: #c10007;
@@ -236,7 +240,7 @@ export const TOKEN_GROUPS = [
   { label: "States", tokens: ["hover-bg", "active-bg", "disabled-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },
-  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-ring", "primary-subtle", "primary-foreground", "danger", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
+  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-ring", "primary-subtle", "primary-foreground", "danger", "danger-hover", "danger-active", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
   { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-ring", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-ring", "sell-foreground"] },
   { label: "Order book", tokens: ["book-bid-fill", "book-bid-flash", "book-bid-text", "book-ask-fill", "book-ask-flash", "book-ask-text"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
