@@ -106,6 +106,7 @@
 
   /* Focus */
   --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
+  --ring-primary: var(--primary);
 
   /* Radius */
   --radius-default: 8px;
@@ -225,6 +226,7 @@
 
   /* Focus */
   --ring: color-mix(in srgb, #404040 50%, transparent);
+  --ring-primary: var(--primary);
 
   /* Chart */
   --bullish: #089981;
@@ -308,6 +310,7 @@
   --color-border-inverse: var(--border-inverse);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-ring-primary: var(--ring-primary);
   --color-text-primary: var(--text-primary);
   --color-text-default: var(--text-default);
   --color-text-secondary: var(--text-secondary);

@@ -102,6 +102,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Focus */
   --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
+  --ring-primary: var(--primary);
 
   /* Radius */
   --radius-default: 8px;
@@ -221,6 +222,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
   /* Focus */
   --ring: color-mix(in srgb, #404040 50%, transparent);
+  --ring-primary: var(--primary);
 
   /* Chart */
   --bullish: #089981;
