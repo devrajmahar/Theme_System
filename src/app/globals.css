@@ -393,13 +393,13 @@ body {
 }
 button:not(:disabled), [role="button"]:not([aria-disabled="true"]), a[href], select:not(:disabled) { cursor: pointer; }
 button:disabled { cursor: not-allowed; }
-::selection { background: color-mix(in srgb, var(--text-primary) 8%, transparent); }
+::selection { background: var(--primary-subtle); }
 
 @keyframes enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .section-enter { animation: enter 420ms ease-out both; }
 .theme-scrollbar { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 .editor-grid {
-  background-image: linear-gradient(to right, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--border) 45%, transparent) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--border-softer) 1px, transparent 1px), linear-gradient(to bottom, var(--border-softer) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
