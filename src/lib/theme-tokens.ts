@@ -120,6 +120,9 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Chart */
   --bullish: #089981;
   --bearish: #f7525f;
+  /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
+  --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
+  --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
 }
 
 .dark {
@@ -227,6 +230,9 @@ export const DEFAULT_THEME_CSS = `:root {
   /* Chart */
   --bullish: #089981;
   --bearish: #f7525f;
+  /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
+  --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
+  --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
 }`;
 
 export const TOKEN_GROUPS = [
@@ -240,6 +246,6 @@ export const TOKEN_GROUPS = [
   { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-ring", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-ring", "sell-foreground"] },
   { label: "Order book", tokens: ["book-bid-fill", "book-bid-text", "book-ask-fill", "book-ask-text"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
-  { label: "Chart", tokens: ["bullish", "bearish"] },
+  { label: "Chart", tokens: ["bullish", "bearish", "buy-bubble", "sell-bubble"] },
   { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-button"] },
 ] as const;

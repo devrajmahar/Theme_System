@@ -124,6 +124,9 @@
   /* Chart */
   --bullish: #089981;
   --bearish: #f7525f;
+  /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
+  --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
+  --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
 }
 
 .dark {
@@ -231,6 +234,9 @@
   /* Chart */
   --bullish: #089981;
   --bearish: #f7525f;
+  /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
+  --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
+  --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
 }
 
 /* shadcn compatibility — components consume these aliases, users edit the clean tokens above. */
@@ -357,6 +363,8 @@
   --color-book-ask-text: var(--book-ask-text);
   --color-bullish: var(--bullish);
   --color-bearish: var(--bearish);
+  --color-buy-bubble: var(--buy-bubble);
+  --color-sell-bubble: var(--sell-bubble);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
