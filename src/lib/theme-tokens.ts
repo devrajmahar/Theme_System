@@ -181,13 +181,14 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-disabled-foreground: #b7d9f8;
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
-  --danger: #f7525f;
-  --danger-hover: #f96a75;
-  --danger-active: #fb838c;
-  --danger-disabled: #9f0712;
-  --danger-disabled-foreground: #ff6467;
+  /* Dark danger button is the Sell button: same fill, states and foreground. */
+  --danger: var(--sell);
+  --danger-hover: var(--sell-hover);
+  --danger-active: var(--sell-active);
+  --danger-disabled: var(--sell-disabled);
+  --danger-disabled-foreground: var(--sell-disabled-foreground);
   --danger-ring: #c10007;
-  --danger-foreground: #ffffff;
+  --danger-foreground: var(--sell-foreground);
 
   /* Buttons — neutral default button */
   --button-fill: #f5f5f5;

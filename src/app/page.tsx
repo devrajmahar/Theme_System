@@ -35,7 +35,7 @@ export default function Home() {
 }
 
 function ComponentsPreview() { return <div className="grid gap-4 lg:grid-cols-2">
-  <SignUpCard />
+  <div className="grid content-start gap-4"><SignUpCard /><DangerActionsCard /></div>
   <div className="grid gap-4"><Card><CardHeader className="pb-4"><CardTitle className="text-base">Button variants</CardTitle><CardDescription>Hover, focus, active, and disabled states.</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="destructive"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button disabled>Disabled</Button></CardContent></Card><TradeButtonsCard /><OrderBookCard /><Card><CardHeader className="pb-4"><CardTitle className="text-base">Badges & status</CardTitle></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge>Default</Badge><Badge variant="secondary">In review</Badge><Badge variant="outline">Draft</Badge><Badge variant="destructive">Failed</Badge><span className="inline-flex items-center gap-1.5 text-sm text-text-secondary"><span className="size-2 rounded-large bg-primary" /> Operational</span></CardContent></Card></div>
   </div>; }
 
@@ -125,26 +125,23 @@ function CandlestickPreview() {
   );
 }
 
-function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-foreground","button-fill","buy","buy-hover","buy-active","sell","sell-hover","sell-active","book-bid-fill","book-bid-text","book-ask-fill","book-ask-text","bullish","bearish","ring-primary"]; const values = useTokenValues(colors); return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="space-y-0.5 p-2"><p className="truncate font-mono text-[10px]">--{token}</p><p className="truncate font-mono text-[10px] text-text-secondary" title={values[token]}>{values[token] || " "}</p></div></div>)}</div></CardContent></Card></div>; }
+function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-hover","danger-active","danger-disabled","danger-disabled-foreground","danger-ring","danger-foreground","button-fill","buy","buy-hover","buy-active","sell","sell-hover","sell-active","book-bid-fill","book-bid-text","book-ask-fill","book-ask-text","bullish","bearish","ring-primary"]; const values = useTokenValues(colors); return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="space-y-0.5 p-2"><p className="truncate font-mono text-[10px]">--{token}</p><p className="truncate font-mono text-[10px] text-text-secondary" title={values[token]}>{values[token] || " "}</p></div></div>)}</div></CardContent></Card></div>; }
 
 // Auth form: light — card on --surface-secondary, inputs on --surface; dark — card on --surface, inputs on --surface-secondary.
 // Submitting empty/invalid fields sets aria-invalid (--danger border + 3px --danger-ring ring) and shows a FieldError.
+// After that, an invalid field re-validates as the user types and only clears once its value is valid.
+const emailError = (value: string) => { const email = value.trim(); return !email ? "Please enter your email address." : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Please enter a valid email address." : undefined; };
+const passwordError = (value: string) => !value ? "Please choose a password." : value.length < 8 ? "Password must be at least 8 characters." : undefined;
+
 function SignUpCard() {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const validate = (form: HTMLFormElement) => {
     const data = new FormData(form);
-    const email = String(data.get("email") ?? "").trim();
-    const password = String(data.get("password") ?? "");
-    const next: typeof errors = {};
-    if (!email) next.email = "Please enter your email address.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "Please enter a valid email address.";
-    if (!password) next.password = "Please choose a password.";
-    else if (password.length < 8) next.password = "Password must be at least 8 characters.";
-    setErrors(next);
+    setErrors({ email: emailError(String(data.get("email") ?? "")), password: passwordError(String(data.get("password") ?? "")) });
   };
   return <Card className="bg-surface-secondary! dark:bg-surface!"><CardHeader><div className="flex items-start justify-between"><div><CardTitle>Create account</CardTitle><CardDescription className="mt-1.5">Enter your details to get started.</CardDescription></div><Badge>New</Badge></div></CardHeader><CardContent><form noValidate onSubmit={(e) => { e.preventDefault(); validate(e.currentTarget); }} onReset={() => setErrors({})} className="space-y-4">
-    <div className="space-y-2"><Label>Email address</Label><Input name="email" type="email" placeholder="name@example.com" aria-invalid={errors.email ? true : undefined} onChange={() => errors.email && setErrors((prev) => ({ ...prev, email: undefined }))} />{errors.email && <FieldError>{errors.email}</FieldError>}</div>
-    <div className="space-y-2"><Label>Password</Label><Input name="password" type="password" placeholder="At least 8 characters" aria-invalid={errors.password ? true : undefined} onChange={() => errors.password && setErrors((prev) => ({ ...prev, password: undefined }))} />{errors.password && <FieldError>{errors.password}</FieldError>}</div>
+    <div className="space-y-2"><Label>Email address</Label><Input name="email" type="email" placeholder="name@example.com" aria-invalid={errors.email ? true : undefined} onChange={(e) => { if (!errors.email) return; const next = emailError(e.currentTarget.value); setErrors((prev) => ({ ...prev, email: next })); }} />{errors.email && <FieldError>{errors.email}</FieldError>}</div>
+    <div className="space-y-2"><Label>Password</Label><Input name="password" type="password" placeholder="At least 8 characters" aria-invalid={errors.password ? true : undefined} onChange={(e) => { if (!errors.password) return; const next = passwordError(e.currentTarget.value); setErrors((prev) => ({ ...prev, password: next })); }} />{errors.password && <FieldError>{errors.password}</FieldError>}</div>
     <div className="flex gap-2"><Button type="submit" variant="secondary" className="flex-1">Create account <HugeiconsIcon icon={ArrowRight01Icon} size={16} /></Button><Button type="reset" variant="outline">Cancel</Button></div>
   </form></CardContent></Card>;
 }
@@ -174,6 +171,23 @@ function useTokenValues(tokens: string[]) {
     };
   }, [key]);
   return values;
+}
+
+// The state row is pinned (not hover-driven) so all --danger-* fills can be compared side by side.
+const dangerStates = [
+  ["Default", "--danger", "--danger-foreground", "bg-danger text-danger-foreground"],
+  ["Hover", "--danger-hover", "--danger-foreground", "bg-danger-hover text-danger-foreground"],
+  ["Active", "--danger-active", "--danger-foreground", "bg-danger-active text-danger-foreground"],
+  ["Disabled", "--danger-disabled", "--danger-disabled-foreground", "bg-danger-disabled text-danger-disabled-foreground"],
+] as const;
+
+function DangerActionsCard() {
+  return <Card><CardHeader className="pb-4"><CardTitle className="text-base">Danger actions</CardTitle><CardDescription>Every <code>--danger-*</code> token: button states, the invalid-field ring, and a confirm pattern.</CardDescription></CardHeader><CardContent className="grid gap-5">
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">States</p><div className="grid grid-cols-2 gap-3 sm:grid-cols-4">{dangerStates.map(([label, fill, text, className]) => <div key={label} className="space-y-1.5"><div aria-hidden className={`flex h-7 items-center justify-center gap-1.5 rounded-compact text-sm font-medium leading-4 ${className}`}><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete</div><p className="text-[11px] font-medium">{label}</p><div className="space-y-0.5 font-mono text-[10px] leading-[14px] text-text-secondary"><p className="truncate" title={fill}>{fill}</p><p className="truncate" title={text}>{text}</p></div></div>)}</div></div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Live buttons</p><div className="flex flex-wrap items-center gap-2"><Button variant="destructive" size="sm">Remove</Button><Button variant="destructive"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button variant="destructive" size="lg">Delete account</Button><Button variant="destructive" size="icon" aria-label="Delete"><HugeiconsIcon icon={Delete02Icon} size={16} /></Button><Button variant="destructive" disabled>Delete</Button></div></div>
+    <div className="space-y-2"><p className="text-xs font-medium text-text-secondary">Invalid field · <code>--danger</code> border + <code>--danger-ring</code></p><Input aria-invalid defaultValue="name@example" aria-label="Email address (invalid example)" /><FieldError>Please enter a valid email address.</FieldError></div>
+    <div className="rounded-default border p-4"><p className="text-sm font-medium">Delete workspace?</p><p className="mt-1 text-xs leading-5 text-text-secondary">This permanently removes Acme Studio and all of its projects. This can&apos;t be undone.</p><div className="mt-3 flex justify-end gap-2"><Button variant="outline" size="sm">Cancel</Button><Button variant="destructive" size="sm"><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete workspace</Button></div></div>
+  </CardContent></Card>;
 }
 
 // Dedicated trade actions: --buy-* / --sell-* tokens. Hover and press change the fill only.
