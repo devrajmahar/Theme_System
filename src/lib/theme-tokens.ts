@@ -105,7 +105,7 @@ export const DEFAULT_THEME_CSS = `:root {
   --radius-medium: 12px;
   --radius-small: 4px;
   --radius-large: 999px;
-  --radius-button: 6px;
+  --radius-compact: 6px;
 
   /* Shadows */
   --shadow-1: 0 0 1px 0 color-mix(in srgb, #000000 20%, transparent), 0 1px 2px 0 color-mix(in srgb, #000000 5%, transparent), 0 1px 1px 0 color-mix(in srgb, #000000 1%, transparent);
@@ -239,5 +239,5 @@ export const TOKEN_GROUPS = [
   { label: "Order book", tokens: ["book-bid-fill", "book-bid-text", "book-ask-fill", "book-ask-text"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
   { label: "Chart", tokens: ["bullish", "bearish", "buy-bubble", "sell-bubble"] },
-  { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-button"] },
+  { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-compact"] },
 ] as const;

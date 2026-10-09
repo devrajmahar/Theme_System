@@ -15,10 +15,10 @@ export function Button({ variant = "default", size = "default", className = "", 
     sell: `border-transparent bg-sell text-sell-foreground hover:bg-sell-hover active:bg-sell-active disabled:bg-sell-disabled disabled:text-sell-disabled-foreground ${focusRing}`,
   };
   const sizes = {
-    sm: "h-6 gap-1 rounded-button px-2 text-xs leading-[14px] [&_svg]:size-3.5",
-    default: "h-7 gap-1.5 rounded-button px-2.5 text-sm leading-4 [&_svg]:size-3.5",
+    sm: "h-6 gap-1 rounded-compact px-2 text-xs leading-[14px] [&_svg]:size-3.5",
+    default: "h-7 gap-1.5 rounded-compact px-2.5 text-sm leading-4 [&_svg]:size-3.5",
     lg: "h-8 gap-1.5 rounded-default px-3 text-sm leading-4 [&_svg]:size-4",
-    icon: "size-7 rounded-button [&_svg]:size-3.5",
+    icon: "size-7 rounded-compact [&_svg]:size-3.5",
   };
   return <button className={`inline-flex shrink-0 select-none items-center justify-center whitespace-nowrap border font-medium outline-none disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 ${variants[variant]} ${sizes[size]} ${className}`} {...props} />;
 }

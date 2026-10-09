@@ -221,7 +221,7 @@ export function FormatChecks() {
   const failed = checks?.filter((c) => !c.ok).length ?? 0;
   const groups = checks ? [...new Set(checks.map((c) => c.group))] : [];
   return <Card><CardHeader><div className="flex items-start justify-between gap-3"><div><CardTitle>Format checks</CardTitle><CardDescription className="mt-1.5">Fetches every icon this site serves and parses the actual bytes: dimensions, transparency, ICO / ICNS internals, SVG safety, manifest, &lt;head&gt; links and Google&apos;s favicon rules.</CardDescription></div>
-    <button type="button" onClick={() => { setChecks(null); setRun((n) => n + 1); }} className="h-7 shrink-0 rounded-button border px-2.5 text-sm font-medium text-text-default hover:border-transparent hover:bg-hover-bg active:bg-active-bg">Re-run</button></div></CardHeader>
+    <button type="button" onClick={() => { setChecks(null); setRun((n) => n + 1); }} className="h-7 shrink-0 rounded-compact border px-2.5 text-sm font-medium text-text-default hover:border-transparent hover:bg-hover-bg active:bg-active-bg">Re-run</button></div></CardHeader>
     <CardContent>
       {!checks ? <p className="text-sm text-text-secondary">Checking…</p> : <>
         <p className={`mb-4 text-sm font-medium ${failed ? "text-text-danger" : "text-text-positive"}`}>{failed ? `${failed} of ${checks.length} checks failed` : `All ${checks.length} checks passed`}</p>

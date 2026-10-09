@@ -56,7 +56,7 @@ export function OrderBookCard() {
   const bidShare = Math.round((bidTotals.at(-1)! / (bidTotals.at(-1)! + askTotals.at(-1)!)) * 100);
 
   return <Card><CardHeader className="pb-4"><div className="flex items-start justify-between gap-3"><div><CardTitle className="text-base">Order book</CardTitle><CardDescription className="mt-1.5">Depth fills with the price text drawn over them.</CardDescription></div>
-    <button type="button" aria-pressed={live} onClick={() => setLive((v) => !v)} className="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-button border px-2 text-xs font-medium text-text-default hover:border-transparent hover:bg-hover-bg active:bg-active-bg"><span className={`size-1.5 rounded-full ${live ? "bg-positive" : "bg-text-muted"}`} />{live ? "Live" : "Paused"}</button></div></CardHeader>
+    <button type="button" aria-pressed={live} onClick={() => setLive((v) => !v)} className="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-compact border px-2 text-xs font-medium text-text-default hover:border-transparent hover:bg-hover-bg active:bg-active-bg"><span className={`size-1.5 rounded-full ${live ? "bg-positive" : "bg-text-muted"}`} />{live ? "Live" : "Paused"}</button></div></CardHeader>
     <CardContent className="grid gap-3">
       <div className="overflow-hidden rounded-default border">
         <div className="grid h-7 grid-cols-3 items-center border-b px-3 text-[11px] font-medium text-text-secondary"><span>Price (USDT)</span><span className="text-right">Size (BTC)</span><span className="text-right">Total</span></div>
@@ -68,7 +68,7 @@ export function OrderBookCard() {
         <div className="py-1">{bids.map((l, i) => <Row key={i} side="bid" level={l} total={bidTotals[i]} max={max} />)}</div>
       </div>
       {/* Bid / ask ratio: same fill + text pairs, side by side */}
-      <div className="flex h-6 overflow-hidden rounded-button text-[11px] font-semibold tabular-nums">
+      <div className="flex h-6 overflow-hidden rounded-compact text-[11px] font-semibold tabular-nums">
         <div className="flex items-center bg-book-bid-fill px-2 text-book-bid-text transition-[width] duration-300" style={{ width: `${bidShare}%` }}>B {bidShare}%</div>
         <div className="flex flex-1 items-center justify-end bg-book-ask-fill px-2 text-book-ask-text">{100 - bidShare}% S</div>
       </div>
