@@ -4,13 +4,15 @@ import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNo
 // outline = surface + border, ghost = text only, buy / sell = dedicated trade actions. Focus is a 2px --ring-primary outline on every variant — no ring shadow or background change.
 // Hover/press change the fill only — no hover shadow (our choice; Conduit adds shadow-1).
 const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid focus-visible:outline-ring-primary";
-export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "buy" | "sell"; size?: "default" | "sm" | "lg" | "icon" }) {
+export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "destructive-text" | "buy" | "sell"; size?: "default" | "sm" | "lg" | "icon" }) {
   const variants = {
     default: `border-transparent bg-button-fill text-button-fill-foreground hover:bg-button-fill-hover active:bg-button-fill-active disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
     secondary: `border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled disabled:text-primary-disabled-foreground ${focusRing}`,
     outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg active:border-transparent active:bg-active-bg disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
     ghost: `border-transparent text-text-default hover:bg-hover-bg active:bg-active-bg disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
-    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-active disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing}`,
+    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing}`,
+    // Text only: no fill or border in any state. Press reuses the hover colour so touch (no hover) still gets feedback.
+    "destructive-text": `border-transparent bg-transparent text-text-danger hover:text-danger-hover active:text-danger-hover disabled:text-danger-disabled-foreground ${focusRing}`,
     buy: `border-transparent bg-buy text-buy-foreground hover:bg-buy-hover active:bg-buy-active disabled:bg-buy-disabled disabled:text-buy-disabled-foreground ${focusRing}`,
     sell: `border-transparent bg-sell text-sell-foreground hover:bg-sell-hover active:bg-sell-active disabled:bg-sell-disabled disabled:text-sell-disabled-foreground ${focusRing}`,
   };

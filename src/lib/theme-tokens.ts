@@ -64,7 +64,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-foreground: #ffffff;
   --danger: #f7525f;
   --danger-hover: #e5404d;
-  --danger-active: #c9303c;
   --danger-disabled: #ffc9c9;
   --danger-disabled-foreground: #ffa2a2;
   --danger-ring: #ffc9c9;
@@ -114,8 +113,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --shadow-dialog: 0 4px 6px -4px color-mix(in srgb, #101828 10%, transparent), 0 10px 15px -3px color-mix(in srgb, #000000 10%, transparent);
 
   /* Chart */
-  --bullish: #089981;
-  --bearish: #f7525f;
+  --bullish: var(--positive);
+  --bearish: var(--negative);
   /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
   --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
   --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
@@ -181,14 +180,12 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-disabled-foreground: #b7d9f8;
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
-  /* Dark danger button is the Sell button: same fill, states and foreground. */
-  --danger: var(--sell);
-  --danger-hover: var(--sell-hover);
-  --danger-active: var(--sell-active);
-  --danger-disabled: var(--sell-disabled);
-  --danger-disabled-foreground: var(--sell-disabled-foreground);
+  --danger: #f7525f;
+  --danger-hover: #f96a75;
+  --danger-disabled: #6b3135;
+  --danger-disabled-foreground: #d0646c;
   --danger-ring: #c10007;
-  --danger-foreground: var(--sell-foreground);
+  --danger-foreground: #ffffff;
 
   /* Buttons — neutral default button */
   --button-fill: #f5f5f5;
@@ -207,8 +204,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --sell: #f7525f;
   --sell-hover: #f96a75;
   --sell-active: #fb838c;
-  --sell-disabled: #5c2328;
-  --sell-disabled-foreground: #c7535c;
+  --sell-disabled: #6b3135;
+  --sell-disabled-foreground: #ae8e90;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -221,8 +218,8 @@ export const DEFAULT_THEME_CSS = `:root {
   --ring-primary: var(--primary);
 
   /* Chart */
-  --bullish: #089981;
-  --bearish: #f7525f;
+  --bullish: var(--positive);
+  --bearish: var(--negative);
   /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
   --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
   --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
@@ -230,14 +227,15 @@ export const DEFAULT_THEME_CSS = `:root {
 
 export const TOKEN_GROUPS = [
   { label: "Surfaces", tokens: ["surface", "surface-secondary", "surface-subtle", "surface-raised", "surface-overlay", "surface-inverse"] },
-  { label: "Borders", tokens: ["border", "border-secondary", "border-subtle", "border-softer", "border-strong", "border-inverse"] },
+  { label: "Borders", tokens: ["border", "border-secondary", "border-subtle", "border-softer", "border-strong", "border-inverse", "border-width"] },
   { label: "Text", tokens: ["text-primary", "text-default", "text-secondary", "text-muted", "text-positive", "text-negative", "text-danger", "text-warning", "text-interactive", "text-hover", "text-active"] },
   { label: "States", tokens: ["hover-bg", "active-bg", "disabled-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },
-  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-subtle", "primary-foreground", "danger", "danger-hover", "danger-active", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
+  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-disabled-foreground", "primary-subtle", "primary-foreground", "danger", "danger-hover", "danger-disabled", "danger-disabled-foreground", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
   { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-foreground"] },
   { label: "Order book", tokens: ["book-bid-fill", "book-bid-text", "book-ask-fill", "book-ask-text"] },
+  { label: "Focus", tokens: ["ring-primary"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
   { label: "Chart", tokens: ["bullish", "bearish", "buy-bubble", "sell-bubble"] },
   { label: "Radius", tokens: ["radius-default", "radius-medium", "radius-small", "radius-large", "radius-compact"] },

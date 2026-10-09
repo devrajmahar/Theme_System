@@ -2,13 +2,14 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CheckmarkCircle02Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, UserIcon } from "@hugeicons/core-free-icons";
+import { Add01Icon, AlertCircleIcon, ArrowRight01Icon, Calendar03Icon, CheckmarkCircle02Icon, CreditCardIcon, Delete02Icon, Folder01Icon, Home01Icon, Mail01Icon, Notification03Icon, Search01Icon, Settings01Icon, Tick02Icon, UserIcon } from "@hugeicons/core-free-icons";
 import { BellIcon, CalendarIcon, ChatRoundDotsIcon, FolderIcon, HomeIcon, LetterIcon, MagnifierIcon, SettingsIcon, UserIcon as SolarUserIcon } from "@solar-icons/react/bold";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PalettePlayground } from "@/components/palette-playground";
 import { BrandPreview } from "@/components/brand-preview";
 import { OrderBookCard } from "@/components/order-book";
 import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle, FieldError, Input, Label } from "@/components/ui/showcase";
+import { TOKEN_GROUPS } from "@/lib/theme-tokens";
 
 const navItems = [["Overview", Home01Icon], ["Projects", Folder01Icon], ["Messages", Mail01Icon], ["Calendar", Calendar03Icon], ["Settings", Settings01Icon]] as const;
 const iconExamples = [["Home", Home01Icon], ["Search", Search01Icon], ["Projects", Folder01Icon], ["Messages", Mail01Icon], ["Calendar", Calendar03Icon], ["Alerts", Notification03Icon], ["Profile", UserIcon], ["Settings", Settings01Icon]] as const;
@@ -35,9 +36,45 @@ export default function Home() {
 }
 
 function ComponentsPreview() { return <div className="grid gap-4 lg:grid-cols-2">
-  <div className="grid content-start gap-4"><SignUpCard /><DangerActionsCard /></div>
+  <div className="grid content-start gap-4"><SignUpCard /><DangerActionsCard /><AlertsCard /></div>
   <div className="grid gap-4"><Card><CardHeader className="pb-4"><CardTitle className="text-base">Button variants</CardTitle><CardDescription>Hover, focus, active, and disabled states.</CardDescription></CardHeader><CardContent className="flex flex-wrap gap-2"><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="destructive"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button disabled>Disabled</Button></CardContent></Card><TradeButtonsCard /><OrderBookCard /><Card><CardHeader className="pb-4"><CardTitle className="text-base">Badges & status</CardTitle></CardHeader><CardContent className="flex flex-wrap gap-2"><Badge>Default</Badge><Badge variant="secondary">In review</Badge><Badge variant="outline">Draft</Badge><Badge variant="destructive">Failed</Badge><span className="inline-flex items-center gap-1.5 text-sm text-text-secondary"><span className="size-2 rounded-large bg-primary" /> Operational</span></CardContent></Card></div>
+  <ElevationCard />
   </div>; }
+
+// Status messages pair each subtle fill with its text token; tags add the indigo / purple accents.
+const alerts = [
+  ["Withdrawal completed", "0.25 BTC was sent to your external wallet.", "bg-positive-subtle text-text-positive", CheckmarkCircle02Icon],
+  ["Margin level is low", "Add funds or reduce positions to avoid liquidation.", "bg-warning-subtle text-text-warning", AlertCircleIcon],
+  ["Order rejected", "Insufficient balance to place this order.", "bg-negative-subtle text-text-negative", AlertCircleIcon],
+] as const;
+const tags = [
+  ["Filled", "bg-positive-subtle text-text-positive", "bg-positive"],
+  ["Pending", "bg-warning-subtle text-text-warning", "bg-warning"],
+  ["Cancelled", "bg-negative-subtle text-text-negative", "bg-negative"],
+  ["New listing", "bg-indigo-subtle text-indigo", "bg-indigo"],
+  ["Beta", "bg-purple-subtle text-purple", "bg-purple"],
+] as const;
+
+function AlertsCard() {
+  return <Card><CardHeader className="pb-4"><CardTitle className="text-base">Alerts & tags</CardTitle><CardDescription>Positive, warning, negative, indigo, and purple, each with its <code>-subtle</code> fill.</CardDescription></CardHeader><CardContent className="grid gap-4">
+    <div className="grid gap-2">{alerts.map(([title, body, className, icon]) => <div key={title} role="status" className={`flex items-start gap-2.5 rounded-default px-3 py-2.5 ${className}`}><HugeiconsIcon icon={icon} size={16} className="mt-0.5 shrink-0" /><div><p className="text-sm font-medium leading-5">{title}</p><p className="text-xs leading-5 opacity-90">{body}</p></div></div>)}</div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Tags</p><div className="flex flex-wrap gap-2">{tags.map(([label, className]) => <span key={label} className={`inline-flex h-5 items-center rounded-large px-2 text-xs font-medium leading-[14px] ${className}`}>{label}</span>)}</div></div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Status dots</p><div className="flex flex-wrap gap-4">{tags.map(([label, , dot]) => <span key={label} className="inline-flex items-center gap-1.5 text-sm text-text-secondary"><span className={`size-2 rounded-large ${dot}`} />{label}</span>)}</div></div>
+  </CardContent></Card>;
+}
+
+// Elevation, overlay and inverse surfaces, plus the border colours that only show up on controls and dividers.
+function ElevationCard() {
+  return <Card className="lg:col-span-2"><CardHeader className="pb-4"><CardTitle className="text-base">Elevation & overlays</CardTitle><CardDescription>Shadows, the dialog overlay, inverse tooltips, and the stronger border colours.</CardDescription></CardHeader><CardContent className="grid gap-5 lg:grid-cols-3">
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Elevation</p><div className="grid grid-cols-2 gap-3 rounded-default bg-surface-secondary p-4">{[["shadow-1", "Card", "shadow-1"], ["shadow-2", "Dropdown", "shadow-2"], ["shadow-3", "Popover", "shadow-3"]].map(([token, label, className]) => <div key={token} className={`rounded-default bg-surface p-3 ${className}`}><p className="text-xs font-medium">{label}</p><code className="text-[10px] text-text-secondary">--{token}</code></div>)}<div className="rounded-default bg-surface-raised p-3"><p className="text-xs font-medium">Raised</p><code className="text-[10px] text-text-secondary">--surface-raised</code></div></div></div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Dialog · <code>--surface-overlay</code> + <code>--shadow-dialog</code></p><div className="relative h-[184px] overflow-hidden rounded-default border bg-surface p-3"><div aria-hidden className="space-y-2"><div className="h-3 w-2/3 rounded-small bg-surface-raised" /><div className="h-3 w-1/2 rounded-small bg-surface-raised" /><div className="h-16 rounded-default bg-surface-secondary" /><div className="h-3 w-3/4 rounded-small bg-surface-raised" /></div><div className="absolute inset-0 grid place-items-center bg-surface-overlay p-3"><div role="dialog" aria-label="Close position" className="w-full max-w-[240px] rounded-medium bg-surface p-4 shadow-dialog"><p className="text-sm font-medium">Close position?</p><p className="mt-1 text-xs leading-5 text-text-secondary">Your BTC long will be closed at market price.</p><div className="mt-3 flex justify-end gap-2"><Button variant="outline" size="sm">Cancel</Button><Button variant="destructive" size="sm">Close</Button></div></div></div></div></div>
+    <div className="grid content-start gap-4">
+      <div><p className="mb-2 text-xs font-medium text-text-secondary">Tooltip · <code>--surface-inverse</code></p><div className="flex items-center gap-3 rounded-default border p-3"><Button variant="outline" size="icon" aria-label="Settings"><HugeiconsIcon icon={Settings01Icon} size={16} /></Button><span role="tooltip" className="relative rounded-small bg-surface-inverse px-2 py-1 text-xs font-medium text-surface shadow-2"><span aria-hidden className="absolute -left-1 top-1/2 size-2 -translate-y-1/2 rotate-45 bg-surface-inverse" />Account settings</span></div></div>
+      <div><p className="mb-2 text-xs font-medium text-text-secondary">Controls · <code>--border-strong</code></p><div className="flex flex-wrap items-center gap-4 rounded-default border p-3 text-sm">{([["Unchecked", false], ["Checked", true]] as const).map(([label, checked]) => <span key={label} className="inline-flex items-center gap-2"><span aria-hidden className={`grid size-4 place-items-center rounded-small ${checked ? "bg-primary text-primary-foreground" : "border border-border-strong bg-surface"}`}>{checked && <HugeiconsIcon icon={Tick02Icon} size={12} />}</span>{label}</span>)}<span className="inline-flex items-center gap-2"><span aria-hidden className="size-4 rounded-large border border-border-strong bg-surface" />Radio</span></div></div>
+      <div><p className="mb-2 text-xs font-medium text-text-secondary">Dividers</p><div className="grid gap-2 rounded-default border p-3">{["border", "border-subtle", "border-softer", "border-strong", "border-inverse"].map((token) => <div key={token} className="flex items-center gap-3"><code className="w-28 shrink-0 text-[10px] text-text-secondary">--{token}</code><div className="h-0 flex-1 border-t" style={{ borderColor: `var(--${token})` }} /></div>)}</div></div>
+    </div>
+  </CardContent></Card>;
+}
 
 function StatesAndIconsPreview() {
   const [activeIcon, setActiveIcon] = useState("Hugeicons · Home");
@@ -52,11 +89,11 @@ function StatesAndIconsPreview() {
 
     <Card><CardHeader><CardTitle>Interactive icons</CardTitle><CardDescription>Hugeicons stroke and Solar Bold are both wired to <code>--icon</code> and <code>--icon-active</code>.</CardDescription></CardHeader><CardContent><p className="mb-2 text-xs font-medium text-text-secondary">Hugeicons · stroke</p><div className="flex flex-wrap gap-2">{iconExamples.map(([label, icon]) => { const value = `Hugeicons · ${label}`; const active = activeIcon === value; return <button key={value} type="button" aria-label={`Hugeicons ${label}`} aria-pressed={active} onClick={() => setActiveIcon(value)} className={`group inline-flex size-10 items-center justify-center rounded-default border outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid focus-visible:outline-ring-primary ${active ? "bg-active-bg" : "bg-surface hover:bg-hover-bg active:bg-active-bg"}`}><HugeiconsIcon icon={icon} size={19} className={active ? "text-icon-active" : "text-icon transition-colors group-hover:text-icon-active"} /></button>; })}<button type="button" disabled aria-label="Hugeicons disabled" className="inline-flex size-10 items-center justify-center rounded-default border text-text-muted"><HugeiconsIcon icon={Settings01Icon} size={19} /></button></div><p className="mb-2 mt-5 text-xs font-medium text-text-secondary">Solar · bold</p><div className="flex flex-wrap gap-2">{solarIconExamples.map(([label, SolarIcon]) => { const value = `Solar Bold · ${label}`; const active = activeIcon === value; return <button key={value} type="button" aria-label={`Solar Bold ${label}`} aria-pressed={active} onClick={() => setActiveIcon(value)} className={`group inline-flex size-10 items-center justify-center rounded-default border outline-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid focus-visible:outline-ring-primary ${active ? "bg-active-bg text-icon-active" : "bg-surface text-icon hover:bg-hover-bg hover:text-icon-active active:bg-active-bg"}`}><SolarIcon color="currentColor" size={20} /></button>; })}<button type="button" disabled aria-label="Solar Bold disabled" className="inline-flex size-10 items-center justify-center rounded-default border text-text-muted"><SettingsIcon color="currentColor" size={20} /></button></div><div className="mt-5 flex items-center justify-between gap-3 rounded-default border border-border-secondary bg-surface-secondary p-3"><div><p className="text-sm font-medium">Selected icon</p><p className="text-xs text-text-secondary">Click either family to compare its active state.</p></div><Badge variant="secondary" className="shrink-0">{activeIcon}</Badge></div></CardContent></Card>
 
-    <Card><CardHeader><CardTitle>Typography hierarchy</CardTitle><CardDescription>The original three-level text system.</CardDescription></CardHeader><CardContent className="space-y-4"><div><p className="text-xs text-text-secondary">Primary</p><p className="mt-1 text-lg font-medium text-text-primary">Clear, high-emphasis content</p></div><div><p className="text-xs text-text-secondary">Secondary</p><p className="mt-1 text-base text-text-secondary">Supporting descriptions and metadata</p></div><div><p className="text-xs text-text-secondary">Muted</p><p className="mt-1 text-base text-text-muted">Disabled and unavailable content</p></div></CardContent></Card>
+    <Card><CardHeader><CardTitle>Typography hierarchy</CardTitle><CardDescription>The text hierarchy, plus the interactive text states that tabs use.</CardDescription></CardHeader><CardContent className="space-y-4"><div><p className="text-xs text-text-secondary">Primary</p><p className="mt-1 text-lg font-medium text-text-primary">Clear, high-emphasis content</p></div><div><p className="text-xs text-text-secondary">Default</p><p className="mt-1 text-base text-text-default">Body copy, inputs, and control labels</p></div><div><p className="text-xs text-text-secondary">Secondary</p><p className="mt-1 text-base text-text-secondary">Supporting descriptions and metadata</p></div><div><p className="text-xs text-text-secondary">Muted</p><p className="mt-1 text-base text-text-muted">Disabled and unavailable content</p></div><div><p className="text-xs text-text-secondary">Interactive · hover · active</p><div className="mt-1 flex flex-wrap gap-4 text-base font-medium"><span className="text-text-interactive">Orders</span><span className="text-text-hover">Positions</span><span className="text-text-active">History</span></div><p className="mt-1 text-[11px] text-text-muted">Same values as <code>--icon</code> / <code>--icon-active</code>. Hover the page tabs above to see them live.</p></div></CardContent></Card>
 
-    <Card><CardHeader><CardTitle>Surfaces & borders</CardTitle><CardDescription>Primary and secondary layers with their paired border tokens.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3"><SurfaceSample label="Surface" color="var(--surface)" /><SurfaceSample label="Secondary" color="var(--surface-secondary)" border="var(--border-secondary)" /><SurfaceSample label="Primary" color="var(--primary)" /><SurfaceSample label="Danger" color="var(--danger)" /><SurfaceSample label="Hover" color="var(--hover-bg)" /><SurfaceSample label="Active" color="var(--active-bg)" /></div></CardContent></Card>
+    <Card><CardHeader><CardTitle>Surfaces & borders</CardTitle><CardDescription>Every surface layer, with its paired border where it has one.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-5"><SurfaceSample label="Surface" color="var(--surface)" /><SurfaceSample label="Secondary" color="var(--surface-secondary)" border="var(--border-secondary)" /><SurfaceSample label="Subtle" color="var(--surface-subtle)" border="var(--border-subtle)" /><SurfaceSample label="Raised" color="var(--surface-raised)" /><SurfaceSample label="Inverse" color="var(--surface-inverse)" border="var(--border-inverse)" /><SurfaceSample label="Overlay" color="var(--surface-overlay)" /><SurfaceSample label="Primary" color="var(--primary)" /><SurfaceSample label="Danger" color="var(--danger)" /><SurfaceSample label="Hover" color="var(--hover-bg)" /><SurfaceSample label="Active" color="var(--active-bg)" /></div></CardContent></Card>
 
-    <Card className="xl:col-span-2"><CardHeader><CardTitle>Radius system</CardTitle><CardDescription>Small for compact controls, default for general UI, medium for cards, and large for pills and avatars.</CardDescription></CardHeader><CardContent><div className="flex flex-wrap items-end gap-8"><RadiusSample label="Small · 4px"><div className="h-10 w-20 rounded-small border bg-surface-secondary" /></RadiusSample><RadiusSample label="Default · 8px"><div className="h-12 w-28 rounded-default border bg-surface-secondary" /></RadiusSample><RadiusSample label="Medium · 12px"><div className="h-12 w-28 rounded-medium border bg-surface-secondary" /></RadiusSample><RadiusSample label="Large · pill"><div className="flex h-10 w-28 items-center justify-center rounded-large bg-primary text-xs font-medium text-primary-foreground">Pill</div></RadiusSample><RadiusSample label="Large · avatar"><div className="flex size-12 items-center justify-center rounded-large bg-active-bg text-icon-active"><HugeiconsIcon icon={UserIcon} size={21} /></div></RadiusSample></div></CardContent></Card>
+    <Card className="xl:col-span-2"><CardHeader><CardTitle>Radius system</CardTitle><CardDescription>Small for compact controls, default for general UI, medium for cards, and large for pills and avatars.</CardDescription></CardHeader><CardContent><div className="flex flex-wrap items-end gap-8"><RadiusSample label="Small · 4px"><div className="h-10 w-20 rounded-small border bg-surface-secondary" /></RadiusSample><RadiusSample label="Compact · 6px · buttons"><Button variant="outline">Button</Button></RadiusSample><RadiusSample label="Default · 8px"><div className="h-12 w-28 rounded-default border bg-surface-secondary" /></RadiusSample><RadiusSample label="Medium · 12px"><div className="h-12 w-28 rounded-medium border bg-surface-secondary" /></RadiusSample><RadiusSample label="Large · pill"><div className="flex h-10 w-28 items-center justify-center rounded-large bg-primary text-xs font-medium text-primary-foreground">Pill</div></RadiusSample><RadiusSample label="Large · avatar"><div className="flex size-12 items-center justify-center rounded-large bg-active-bg text-icon-active"><HugeiconsIcon icon={UserIcon} size={21} /></div></RadiusSample></div></CardContent></Card>
   </div>;
 }
 
@@ -84,6 +121,7 @@ const CANDLES = [
   { o: 50, h: 58, l: 46, c: 56, v: 44 },
   { o: 56, h: 80, l: 55, c: 76, v: 95 },
 ] as const;
+const BIG_TRADE_VOLUME = 70;
 
 function CandlestickPreview() {
   const priceMin = Math.min(...CANDLES.map((c) => c.l)) - 4;
@@ -96,7 +134,7 @@ function CandlestickPreview() {
     <Card>
       <CardHeader className="pb-2">
         <CardTitle className="text-base">BTCUSDT · 1h</CardTitle>
-        <CardDescription>Candles and volume use --bullish and --bearish only.</CardDescription>
+        <CardDescription>Candles use --bullish / --bearish; big trades are --buy-bubble / --sell-bubble circles outlined in the same colours.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="relative h-44">
@@ -107,6 +145,7 @@ function CandlestickPreview() {
               <div key={index} className="absolute inset-y-0" style={{ left: `${(index / CANDLES.length) * 100}%`, width: `${100 / CANDLES.length}%` }}>
                 <div className={`absolute left-1/2 w-px -translate-x-1/2 ${tone}`} style={{ top: y(candle.h), height: len(candle.h, candle.l) }} />
                 <div className={`absolute left-1/2 w-2.5 -translate-x-1/2 rounded-[1px] ${tone}`} style={{ top: y(Math.max(candle.o, candle.c)), height: len(candle.o, candle.c) }} />
+                {candle.v >= BIG_TRADE_VOLUME && <div aria-hidden className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] ${up ? "border-bullish bg-buy-bubble" : "border-bearish bg-sell-bubble"}`} style={{ top: y(candle.c), width: 12 + (candle.v - BIG_TRADE_VOLUME), height: 12 + (candle.v - BIG_TRADE_VOLUME) }} />}
               </div>
             );
           })}
@@ -119,13 +158,28 @@ function CandlestickPreview() {
         <div className="mt-3 flex flex-wrap gap-4 text-[11px] text-text-secondary">
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-small bg-bullish" /> Candle / volume up</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-small bg-bearish" /> Candle / volume down</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-full border border-bullish bg-buy-bubble" /> Big buy</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-full border border-bearish bg-sell-bubble" /> Big sell</span>
         </div>
       </CardContent>
     </Card>
   );
 }
 
-function TokenPreview() { const colors = ["surface","surface-secondary","surface-subtle","surface-raised","surface-inverse","border","border-secondary","border-subtle","border-strong","text-primary","text-default","text-secondary","text-muted","text-positive","text-negative","text-danger","text-warning","text-interactive","text-hover","text-active","hover-bg","active-bg","disabled-bg","icon","icon-active","positive","positive-subtle","negative","negative-subtle","warning","warning-subtle","indigo","purple","primary","primary-subtle","primary-foreground","danger","danger-hover","danger-active","danger-disabled","danger-disabled-foreground","danger-ring","danger-foreground","button-fill","buy","buy-hover","buy-active","sell","sell-hover","sell-active","book-bid-fill","book-bid-text","book-ask-fill","book-ask-text","bullish","bearish","ring-primary"]; const values = useTokenValues(colors); return <div className="grid gap-4"><Card><CardHeader><CardTitle>Clean token inventory</CardTitle><CardDescription>Only purposeful design tokens are exposed; compatibility aliases are kept out of the theme.</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{colors.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><div className="h-16 border-b" style={{ background: `var(--${token})` }} /><div className="space-y-0.5 p-2"><p className="truncate font-mono text-[10px]">--{token}</p><p className="truncate font-mono text-[10px] text-text-secondary" title={values[token]}>{values[token] || " "}</p></div></div>)}</div></CardContent></Card></div>; }
+// Every token in TOKEN_GROUPS, grouped as in the theme. Each tile previews the token the way it is used.
+const ALL_TOKENS = TOKEN_GROUPS.flatMap((group) => group.tokens);
+function TokenPreview() { const values = useTokenValues(ALL_TOKENS); return <div className="grid gap-4"><div className="flex flex-wrap items-baseline justify-between gap-2 px-1"><p className="text-sm font-medium">Clean token inventory</p><p className="text-xs text-text-secondary">{ALL_TOKENS.length} tokens · values update with the theme and the live editor</p></div>{TOKEN_GROUPS.map((group) => <Card key={group.label}><CardHeader className="pb-4"><CardTitle className="text-base">{group.label}</CardTitle><CardDescription>{group.tokens.length} {group.tokens.length === 1 ? "token" : "tokens"}</CardDescription></CardHeader><CardContent><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">{group.tokens.map((token) => <div key={token} className="overflow-hidden rounded-default border bg-surface"><TokenSwatch token={token} /><div className="space-y-0.5 p-2"><p className="truncate font-mono text-[10px]" title={`--${token}`}>--{token}</p><p className="truncate font-mono text-[10px] text-text-secondary" title={values[token]}>{values[token] || "\u00a0"}</p></div></div>)}</div></CardContent></Card>)}</div>; }
+
+function TokenSwatch({ token }: { token: string }) {
+  const value = `var(--${token})`;
+  if (token.startsWith("shadow-")) return <div className="grid h-16 place-items-center border-b bg-surface-secondary"><div className="h-8 w-14 rounded-default bg-surface" style={{ boxShadow: value }} /></div>;
+  if (token.startsWith("radius-")) return <div className="grid h-16 place-items-center border-b"><div className="h-9 w-14 border-2 border-border-strong bg-surface-secondary" style={{ borderRadius: value }} /></div>;
+  if (token === "border-width") return <div className="grid h-16 place-items-center border-b"><div className="w-16" style={{ borderTop: `${value} solid var(--text-primary)` }} /></div>;
+  if (token.startsWith("text-")) return <div className="grid h-16 place-items-center border-b bg-surface text-xl font-semibold" style={{ color: value }}>Aa</div>;
+  if (token.startsWith("border")) return <div className="grid h-16 place-items-center border-b bg-surface"><div className="h-9 w-14 rounded-default" style={{ border: `2px solid ${value}` }} /></div>;
+  return <div className="h-16 border-b" style={{ background: value }} />;
+}
+
 
 // Auth form: light — card on --surface-secondary, inputs on --surface; dark — card on --surface, inputs on --surface-secondary.
 // Submitting empty/invalid fields sets aria-invalid (--danger border + 3px --danger-ring ring) and shows a FieldError.
@@ -177,14 +231,19 @@ function useTokenValues(tokens: string[]) {
 const dangerStates = [
   ["Default", "--danger", "--danger-foreground", "bg-danger text-danger-foreground"],
   ["Hover", "--danger-hover", "--danger-foreground", "bg-danger-hover text-danger-foreground"],
-  ["Active", "--danger-active", "--danger-foreground", "bg-danger-active text-danger-foreground"],
   ["Disabled", "--danger-disabled", "--danger-disabled-foreground", "bg-danger-disabled text-danger-disabled-foreground"],
+] as const;
+const dangerTextStates = [
+  ["Default", "--text-danger", "text-text-danger"],
+  ["Hover · pressed", "--danger-hover", "text-danger-hover"],
+  ["Disabled", "--danger-disabled-foreground", "text-danger-disabled-foreground"],
 ] as const;
 
 function DangerActionsCard() {
   return <Card><CardHeader className="pb-4"><CardTitle className="text-base">Danger actions</CardTitle><CardDescription>Every <code>--danger-*</code> token: button states, the invalid-field ring, and a confirm pattern.</CardDescription></CardHeader><CardContent className="grid gap-5">
-    <div><p className="mb-2 text-xs font-medium text-text-secondary">States</p><div className="grid grid-cols-2 gap-3 sm:grid-cols-4">{dangerStates.map(([label, fill, text, className]) => <div key={label} className="space-y-1.5"><div aria-hidden className={`flex h-7 items-center justify-center gap-1.5 rounded-compact text-sm font-medium leading-4 ${className}`}><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete</div><p className="text-[11px] font-medium">{label}</p><div className="space-y-0.5 font-mono text-[10px] leading-[14px] text-text-secondary"><p className="truncate" title={fill}>{fill}</p><p className="truncate" title={text}>{text}</p></div></div>)}</div></div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">States</p><div className="grid grid-cols-3 gap-3">{dangerStates.map(([label, fill, text, className]) => <div key={label} className="space-y-1.5"><div aria-hidden className={`flex h-7 items-center justify-center gap-1.5 rounded-compact text-sm font-medium leading-4 ${className}`}><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete</div><p className="text-[11px] font-medium">{label}</p><div className="space-y-0.5 font-mono text-[10px] leading-[14px] text-text-secondary"><p className="truncate" title={fill}>{fill}</p><p className="truncate" title={text}>{text}</p></div></div>)}</div></div>
     <div><p className="mb-2 text-xs font-medium text-text-secondary">Live buttons</p><div className="flex flex-wrap items-center gap-2"><Button variant="destructive" size="sm">Remove</Button><Button variant="destructive"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button variant="destructive" size="lg">Delete account</Button><Button variant="destructive" size="icon" aria-label="Delete"><HugeiconsIcon icon={Delete02Icon} size={16} /></Button><Button variant="destructive" disabled>Delete</Button></div></div>
+    <div><p className="mb-2 text-xs font-medium text-text-secondary">Text buttons · no fill</p><div className="grid grid-cols-3 gap-3">{dangerTextStates.map(([label, token, className]) => <div key={label} className="space-y-1.5"><div aria-hidden className={`flex h-7 items-center justify-center gap-1.5 text-sm font-medium leading-4 ${className}`}><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete</div><p className="text-[11px] font-medium">{label}</p><p className="truncate font-mono text-[10px] leading-[14px] text-text-secondary" title={token}>{token}</p></div>)}</div><div className="mt-3 flex flex-wrap items-center gap-2"><Button variant="destructive-text" size="sm">Remove</Button><Button variant="destructive-text"><HugeiconsIcon icon={Delete02Icon} size={16} /> Delete</Button><Button variant="destructive-text" size="lg">Delete account</Button><Button variant="destructive-text" size="icon" aria-label="Delete"><HugeiconsIcon icon={Delete02Icon} size={16} /></Button><Button variant="destructive-text" disabled>Delete</Button></div></div>
     <div className="space-y-2"><p className="text-xs font-medium text-text-secondary">Invalid field · <code>--danger</code> border + <code>--danger-ring</code></p><Input aria-invalid defaultValue="name@example" aria-label="Email address (invalid example)" /><FieldError>Please enter a valid email address.</FieldError></div>
     <div className="rounded-default border p-4"><p className="text-sm font-medium">Delete workspace?</p><p className="mt-1 text-xs leading-5 text-text-secondary">This permanently removes Acme Studio and all of its projects. This can&apos;t be undone.</p><div className="mt-3 flex justify-end gap-2"><Button variant="outline" size="sm">Cancel</Button><Button variant="destructive" size="sm"><HugeiconsIcon icon={Delete02Icon} size={14} /> Delete workspace</Button></div></div>
   </CardContent></Card>;

@@ -68,7 +68,6 @@
   --primary-foreground: #ffffff;
   --danger: #f7525f;
   --danger-hover: #e5404d;
-  --danger-active: #c9303c;
   --danger-disabled: #ffc9c9;
   --danger-disabled-foreground: #ffa2a2;
   --danger-ring: #ffc9c9;
@@ -118,8 +117,8 @@
   --shadow-dialog: 0 4px 6px -4px color-mix(in srgb, #101828 10%, transparent), 0 10px 15px -3px color-mix(in srgb, #000000 10%, transparent);
 
   /* Chart */
-  --bullish: #089981;
-  --bearish: #f7525f;
+  --bullish: var(--positive);
+  --bearish: var(--negative);
   /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
   --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
   --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
@@ -185,14 +184,12 @@
   --primary-disabled-foreground: #b7d9f8;
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
-  /* Dark danger button is the Sell button: same fill, states and foreground. */
-  --danger: var(--sell);
-  --danger-hover: var(--sell-hover);
-  --danger-active: var(--sell-active);
-  --danger-disabled: var(--sell-disabled);
-  --danger-disabled-foreground: var(--sell-disabled-foreground);
+  --danger: #f7525f;
+  --danger-hover: #f96a75;
+  --danger-disabled: #6b3135;
+  --danger-disabled-foreground: #d0646c;
   --danger-ring: #c10007;
-  --danger-foreground: var(--sell-foreground);
+  --danger-foreground: #ffffff;
 
   /* Buttons — neutral default button */
   --button-fill: #f5f5f5;
@@ -211,8 +208,8 @@
   --sell: #f7525f;
   --sell-hover: #f96a75;
   --sell-active: #fb838c;
-  --sell-disabled: #5c2328;
-  --sell-disabled-foreground: #c7535c;
+  --sell-disabled: #6b3135;
+  --sell-disabled-foreground: #ae8e90;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -225,8 +222,8 @@
   --ring-primary: var(--primary);
 
   /* Chart */
-  --bullish: #089981;
-  --bearish: #f7525f;
+  --bullish: var(--positive);
+  --bearish: var(--negative);
   /* Big-trade bubble fills; the bubble outline uses bullish / bearish. */
   --buy-bubble: color-mix(in srgb, #089981 35%, transparent);
   --sell-bubble: color-mix(in srgb, #f7525f 35%, transparent);
@@ -294,7 +291,6 @@
   --color-destructive-foreground: var(--destructive-foreground);
   --color-danger: var(--danger);
   --color-danger-hover: var(--danger-hover);
-  --color-danger-active: var(--danger-active);
   --color-danger-foreground: var(--danger-foreground);
   --color-danger-disabled: var(--danger-disabled);
   --color-danger-disabled-foreground: var(--danger-disabled-foreground);
