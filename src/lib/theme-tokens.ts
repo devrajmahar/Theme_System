@@ -14,7 +14,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --border-softer: #f5f5f5;
   --border-strong: #c2c2c2;
   --border-inverse: #222222;
-  --border-width: 0.5px;
 
   /* Text */
   --text-primary: #222222;
@@ -136,7 +135,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --border-softer: #2b2b2b;
   --border-strong: #404040;
   --border-inverse: #ffffff;
-  --border-width: 0.5px;
 
   /* Text */
   --text-primary: #f5f5f5;
@@ -227,7 +225,7 @@ export const DEFAULT_THEME_CSS = `:root {
 
 export const TOKEN_GROUPS = [
   { label: "Surfaces", tokens: ["surface", "surface-secondary", "surface-subtle", "surface-raised", "surface-overlay", "surface-inverse"] },
-  { label: "Borders", tokens: ["border", "border-secondary", "border-subtle", "border-softer", "border-strong", "border-inverse", "border-width"] },
+  { label: "Borders", tokens: ["border", "border-secondary", "border-subtle", "border-softer", "border-strong", "border-inverse"] },
   { label: "Text", tokens: ["text-primary", "text-default", "text-secondary", "text-muted", "text-positive", "text-negative", "text-danger", "text-warning", "text-interactive", "text-hover", "text-active"] },
   { label: "States", tokens: ["hover-bg", "active-bg", "disabled-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },

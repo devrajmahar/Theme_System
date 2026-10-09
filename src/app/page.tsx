@@ -174,7 +174,6 @@ function TokenSwatch({ token }: { token: string }) {
   const value = `var(--${token})`;
   if (token.startsWith("shadow-")) return <div className="grid h-16 place-items-center border-b bg-surface-secondary"><div className="h-8 w-14 rounded-default bg-surface" style={{ boxShadow: value }} /></div>;
   if (token.startsWith("radius-")) return <div className="grid h-16 place-items-center border-b"><div className="h-9 w-14 border-2 border-border-strong bg-surface-secondary" style={{ borderRadius: value }} /></div>;
-  if (token === "border-width") return <div className="grid h-16 place-items-center border-b"><div className="w-16" style={{ borderTop: `${value} solid var(--text-primary)` }} /></div>;
   if (token.startsWith("text-")) return <div className="grid h-16 place-items-center border-b bg-surface text-xl font-semibold" style={{ color: value }}>Aa</div>;
   if (token.startsWith("border")) return <div className="grid h-16 place-items-center border-b bg-surface"><div className="h-9 w-14 rounded-default" style={{ border: `2px solid ${value}` }} /></div>;
   return <div className="h-16 border-b" style={{ background: value }} />;
