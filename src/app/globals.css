@@ -64,7 +64,6 @@
   --primary-active: #0050b2;
   --primary-disabled: #b7d9f8;
   --primary-disabled-foreground: #5eb0ef;
-  --primary-ring: #cee7fe;
   --primary-subtle: #e1f0ff;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
@@ -88,14 +87,12 @@
   --buy-active: #056f5c;
   --buy-disabled: #b3e3da;
   --buy-disabled-foreground: #5cbfae;
-  --buy-ring: #b3e3da;
   --buy-foreground: #ffffff;
   --sell: #f7525f;
   --sell-hover: #e5404d;
   --sell-active: #c9303c;
   --sell-disabled: #ffc9c9;
   --sell-disabled-foreground: #ffa2a2;
-  --sell-ring: #ffc9c9;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -105,7 +102,6 @@
   --book-ask-text: #d91a2b;
 
   /* Focus */
-  --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
   --ring-primary: var(--primary);
 
   /* Radius */
@@ -187,7 +183,6 @@
   --primary-active: #0050b2;
   --primary-disabled: #5eb0ef;
   --primary-disabled-foreground: #b7d9f8;
-  --primary-ring: #5eb0ef;
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
@@ -211,14 +206,12 @@
   --buy-active: #0bc0a2;
   --buy-disabled: #0f4a41;
   --buy-disabled-foreground: #3f9e8e;
-  --buy-ring: #0a6b5b;
   --buy-foreground: #ffffff;
   --sell: #f7525f;
   --sell-hover: #f96a75;
   --sell-active: #fb838c;
   --sell-disabled: #5c2328;
   --sell-disabled-foreground: #c7535c;
-  --sell-ring: #a3303a;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -228,7 +221,6 @@
   --book-ask-text: #ff6b76;
 
   /* Focus */
-  --ring: color-mix(in srgb, #404040 50%, transparent);
   --ring-primary: var(--primary);
 
   /* Chart */
@@ -264,7 +256,6 @@
   --sidebar-accent: var(--hover-bg);
   --sidebar-accent-foreground: var(--text-primary);
   --sidebar-border: var(--border-secondary);
-  --sidebar-ring: var(--ring);
 }
 
 @theme inline {
@@ -290,7 +281,6 @@
   --color-primary-active: var(--primary-active);
   --color-primary-disabled: var(--primary-disabled);
   --color-primary-disabled-foreground: var(--primary-disabled-foreground);
-  --color-primary-ring: var(--primary-ring);
   --color-primary-subtle: var(--primary-subtle);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -315,7 +305,6 @@
   --color-border-strong: var(--border-strong);
   --color-border-inverse: var(--border-inverse);
   --color-input: var(--input);
-  --color-ring: var(--ring);
   --color-ring-primary: var(--ring-primary);
   --color-text-primary: var(--text-primary);
   --color-text-default: var(--text-default);
@@ -348,14 +337,12 @@
   --color-buy-active: var(--buy-active);
   --color-buy-disabled: var(--buy-disabled);
   --color-buy-disabled-foreground: var(--buy-disabled-foreground);
-  --color-buy-ring: var(--buy-ring);
   --color-buy-foreground: var(--buy-foreground);
   --color-sell: var(--sell);
   --color-sell-hover: var(--sell-hover);
   --color-sell-active: var(--sell-active);
   --color-sell-disabled: var(--sell-disabled);
   --color-sell-disabled-foreground: var(--sell-disabled-foreground);
-  --color-sell-ring: var(--sell-ring);
   --color-sell-foreground: var(--sell-foreground);
   --color-book-bid-fill: var(--book-bid-fill);
   --color-book-bid-text: var(--book-bid-text);

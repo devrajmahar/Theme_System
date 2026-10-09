@@ -1,18 +1,18 @@
 import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
 // Mirrors Conduit's Button: default = neutral fill, secondary = brand blue,
-// outline = surface + border, ghost = text only, buy / sell = dedicated trade actions. Focus is a 2px outline.
+// outline = surface + border, ghost = text only, buy / sell = dedicated trade actions. Focus is a 2px --ring-primary outline on every variant — no ring shadow or background change.
 // Hover/press change the fill only — no hover shadow (our choice; Conduit adds shadow-1).
-const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid";
+const focusRing = "focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-solid focus-visible:outline-ring-primary";
 export function Button({ variant = "default", size = "default", className = "", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "default" | "secondary" | "outline" | "ghost" | "destructive" | "buy" | "sell"; size?: "default" | "sm" | "lg" | "icon" }) {
   const variants = {
-    default: `border-transparent bg-button-fill text-button-fill-foreground hover:bg-button-fill-hover active:bg-button-fill-active disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    secondary: `border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled disabled:text-primary-disabled-foreground ${focusRing} focus-visible:outline-primary-ring`,
-    outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg active:border-transparent active:bg-active-bg disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    ghost: `border-transparent text-text-default hover:bg-hover-bg active:bg-active-bg disabled:bg-disabled-bg disabled:text-text-muted ${focusRing} focus-visible:outline-border-strong`,
-    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-active disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing} focus-visible:outline-danger-ring`,
-    buy: `border-transparent bg-buy text-buy-foreground hover:bg-buy-hover active:bg-buy-active disabled:bg-buy-disabled disabled:text-buy-disabled-foreground ${focusRing} focus-visible:outline-buy-ring`,
-    sell: `border-transparent bg-sell text-sell-foreground hover:bg-sell-hover active:bg-sell-active disabled:bg-sell-disabled disabled:text-sell-disabled-foreground ${focusRing} focus-visible:outline-sell-ring`,
+    default: `border-transparent bg-button-fill text-button-fill-foreground hover:bg-button-fill-hover active:bg-button-fill-active disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
+    secondary: `border-transparent bg-primary text-primary-foreground hover:bg-primary-hover active:bg-primary-active disabled:bg-primary-disabled disabled:text-primary-disabled-foreground ${focusRing}`,
+    outline: `border-border bg-surface text-text-default hover:border-transparent hover:bg-hover-bg active:border-transparent active:bg-active-bg disabled:border-transparent disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
+    ghost: `border-transparent text-text-default hover:bg-hover-bg active:bg-active-bg disabled:bg-disabled-bg disabled:text-text-muted ${focusRing}`,
+    destructive: `border-transparent bg-danger text-danger-foreground hover:bg-danger-hover active:bg-danger-active disabled:bg-danger-disabled disabled:text-danger-disabled-foreground ${focusRing}`,
+    buy: `border-transparent bg-buy text-buy-foreground hover:bg-buy-hover active:bg-buy-active disabled:bg-buy-disabled disabled:text-buy-disabled-foreground ${focusRing}`,
+    sell: `border-transparent bg-sell text-sell-foreground hover:bg-sell-hover active:bg-sell-active disabled:bg-sell-disabled disabled:text-sell-disabled-foreground ${focusRing}`,
   };
   const sizes = {
     sm: "h-6 gap-1 rounded-button px-2 text-xs leading-[14px] [&_svg]:size-3.5",
@@ -34,7 +34,7 @@ export function Badge({ variant = "default", className = "", ...props }: HTMLAtt
   return <span className={`inline-flex shrink-0 items-center justify-center overflow-clip text-xs font-medium leading-[14px] [&_svg]:pointer-events-none [&_svg]:size-3 [&_svg]:shrink-0 ${variants[variant]} ${className}`} {...props} />;
 }
 // Input: no input token — a --surface-secondary field with --border.
-export function Input({ className = "", ...props }: InputHTMLAttributes<HTMLInputElement>) { return <input className={`h-8 w-full min-w-0 rounded-default border border-border bg-surface dark:bg-surface-secondary px-2.5 py-1 text-base leading-6 text-text-default outline-none transition-colors placeholder:text-text-muted hover:bg-hover-bg dark:hover:bg-hover-bg focus-visible:border-border-strong focus-visible:bg-hover-bg dark:focus-visible:bg-hover-bg focus-visible:ring-[3px] focus-visible:ring-ring aria-invalid:border-danger aria-invalid:ring-[3px] aria-invalid:ring-danger-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled-bg dark:disabled:bg-disabled-bg disabled:text-text-muted md:text-sm md:leading-[21px] ${className}`} {...props} />; }
+export function Input({ className = "", ...props }: InputHTMLAttributes<HTMLInputElement>) { return <input className={`h-8 w-full min-w-0 rounded-default border border-border bg-surface dark:bg-surface-secondary px-2.5 py-1 text-base leading-6 text-text-default outline-none transition-colors placeholder:text-text-muted hover:bg-hover-bg dark:hover:bg-hover-bg ${focusRing} aria-invalid:border-danger aria-invalid:ring-[3px] aria-invalid:ring-danger-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-disabled-bg dark:disabled:bg-disabled-bg disabled:text-text-muted md:text-sm md:leading-[21px] ${className}`} {...props} />; }
 export function Card({ className = "", ...props }: HTMLAttributes<HTMLDivElement>) { return <div className={`rounded-medium border bg-surface text-text-primary ${className}`} {...props} />; }
 export function CardHeader({ className = "", ...props }: HTMLAttributes<HTMLDivElement>) { return <div className={`flex flex-col gap-1.5 p-6 ${className}`} {...props} />; }
 export function CardTitle({ className = "", ...props }: HTMLAttributes<HTMLHeadingElement>) { return <h3 className={`font-semibold leading-none tracking-tight ${className}`} {...props} />; }

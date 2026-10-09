@@ -60,7 +60,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-active: #0050b2;
   --primary-disabled: #b7d9f8;
   --primary-disabled-foreground: #5eb0ef;
-  --primary-ring: #cee7fe;
   --primary-subtle: #e1f0ff;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
@@ -84,14 +83,12 @@ export const DEFAULT_THEME_CSS = `:root {
   --buy-active: #056f5c;
   --buy-disabled: #b3e3da;
   --buy-disabled-foreground: #5cbfae;
-  --buy-ring: #b3e3da;
   --buy-foreground: #ffffff;
   --sell: #f7525f;
   --sell-hover: #e5404d;
   --sell-active: #c9303c;
   --sell-disabled: #ffc9c9;
   --sell-disabled-foreground: #ffa2a2;
-  --sell-ring: #ffc9c9;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -101,7 +98,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --book-ask-text: #d91a2b;
 
   /* Focus */
-  --ring: color-mix(in srgb, #c2c2c2 50%, transparent);
   --ring-primary: var(--primary);
 
   /* Radius */
@@ -183,7 +179,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --primary-active: #0050b2;
   --primary-disabled: #5eb0ef;
   --primary-disabled-foreground: #b7d9f8;
-  --primary-ring: #5eb0ef;
   --primary-subtle: #0050b2;
   --primary-foreground: #ffffff;
   --danger: #f7525f;
@@ -207,14 +202,12 @@ export const DEFAULT_THEME_CSS = `:root {
   --buy-active: #0bc0a2;
   --buy-disabled: #0f4a41;
   --buy-disabled-foreground: #3f9e8e;
-  --buy-ring: #0a6b5b;
   --buy-foreground: #ffffff;
   --sell: #f7525f;
   --sell-hover: #f96a75;
   --sell-active: #fb838c;
   --sell-disabled: #5c2328;
   --sell-disabled-foreground: #c7535c;
-  --sell-ring: #a3303a;
   --sell-foreground: #ffffff;
 
   /* Order book — depth-bar fills and the price text drawn over them (text passes 4.5:1 on its fill). */
@@ -224,7 +217,6 @@ export const DEFAULT_THEME_CSS = `:root {
   --book-ask-text: #ff6b76;
 
   /* Focus */
-  --ring: color-mix(in srgb, #404040 50%, transparent);
   --ring-primary: var(--primary);
 
   /* Chart */
@@ -242,8 +234,8 @@ export const TOKEN_GROUPS = [
   { label: "States", tokens: ["hover-bg", "active-bg", "disabled-bg"] },
   { label: "Icons", tokens: ["icon", "icon-active"] },
   { label: "Status", tokens: ["positive", "positive-subtle", "negative", "negative-subtle", "warning", "warning-subtle", "indigo", "indigo-subtle", "purple", "purple-subtle"] },
-  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-ring", "primary-subtle", "primary-foreground", "danger", "danger-hover", "danger-active", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
-  { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-ring", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-ring", "sell-foreground"] },
+  { label: "Actions", tokens: ["primary", "primary-hover", "primary-active", "primary-disabled", "primary-subtle", "primary-foreground", "danger", "danger-hover", "danger-active", "danger-disabled", "danger-ring", "danger-foreground", "button-fill", "button-fill-hover", "button-fill-active", "button-fill-foreground", "button-fill-subtle"] },
+  { label: "Trade", tokens: ["buy", "buy-hover", "buy-active", "buy-disabled", "buy-disabled-foreground", "buy-foreground", "sell", "sell-hover", "sell-active", "sell-disabled", "sell-disabled-foreground", "sell-foreground"] },
   { label: "Order book", tokens: ["book-bid-fill", "book-bid-text", "book-ask-fill", "book-ask-text"] },
   { label: "Shadows", tokens: ["shadow-1", "shadow-2", "shadow-3", "shadow-dialog"] },
   { label: "Chart", tokens: ["bullish", "bearish", "buy-bubble", "sell-bubble"] },
