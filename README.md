@@ -1,52 +1,22 @@
-# Theme Testing
+# Theme Studio
 
-Next.js (App Router) base UI with **Inter**, **Hugeicons**, and light/dark CSS design tokens.
+Static HTML, CSS, and browser JavaScript theme playground. There is no React, Next.js, Tailwind build, package install, or Node server at runtime. The existing Tailwind utility styles are included in `styles.css`.
 
-## Getting started
+## Run locally
 
 ```bash
-bun install
-bun dev
+python serve.py
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open <http://127.0.0.1:8000>. To use another port, run `python serve.py --port 9000`.
 
-## Design tokens
+You can also place these files on any static host. Keep `index.html`, `styles.css`, `app.js`, `brand-checks.js`, `media/`, `brand-assets/`, and the three root icon files together. The Brand tab's format checks require an HTTP server because browsers do not allow its asset fetches from `file://`.
 
-Defined in `src/app/globals.css` as CSS variables, also mapped to Tailwind utilities.
+## Edit the theme
 
-| Token | Light | Dark | Utility |
-| --- | --- | --- | --- |
-| Surface | `#FFFFFF` | `#141414` | `bg-surface` |
-| Secondary Surface | `#FAFAFA` | `#181818` | `bg-surface-secondary` |
-| Border | `#141414` 6% | `#F0F0F0` 8% | `border-border` |
-| Secondary Border | `#141414` 6% | `#F0F0F0` 8% | `border-border-secondary` |
+- Edit the CSS variables in the **Live CSS editor** to preview changes immediately, then use **Copy CSS** to save them.
+- To change the starting theme for everyone, edit the `:root` and `.dark` rules in the `#live-theme` style and `#theme-css` textarea in `index.html` together. The textarea contains the editor's reset value.
+- `styles.css` contains the compiled utility styles and component rules from the previous Tailwind setup. It is committed, so running the site needs no build step. Edit this file directly when changing component styles or adding utility classes.
+- `app.js` handles tabs, the light/dark toggle, editor, form, icons, dashboard navigation, and order book. `brand-checks.js` validates the included brand assets.
 
-**Rule:** `border-border` on primary surface · `border-border-secondary` on secondary surface.
-| Primary Text | `#141414` | `#F0F0F0` | `text-text-primary` |
-| Secondary Text | `#141414` 74% | `#F0F0F0` 74% | `text-text-secondary` |
-| Muted Text | `#141414` 36% | `#F0F0F0` 36% | `text-text-muted` |
-| Hover Background | `#141414` 3.5% | `#F0F0F0` 8% | `bg-hover-bg` |
-| Active Background | `#141414` 5% | `#F0F0F0` 14% | `bg-active-bg` |
-| Icon | `#141414` 50% | `#F0F0F0` 66% | `text-icon` |
-| Active Icon | `#141414` | `#F0F0F0` | `text-icon-active` |
-| Primary Theme | `#006EDD` | `#006EDD` | `bg-primary` / `.ui-primary` |
-| Bullish | `#089981` | `#089981` | `bg-bullish` · candles / volume up |
-| Bearish | `#f7525f` | `#f7525f` | `bg-bearish` · candles / volume down |
-| Focus Ring | `#141414` 20% | `#F0F0F0` 15% | `ring-ring` |
-
-### Radius (shared)
-
-| Token | Value | Utility |
-| --- | --- | --- |
-| Default | `6px` | `rounded-default` |
-| Small | `4px` | `rounded-small` |
-| Large | `999px` | `rounded-large` |
-
-Use `.ui-interactive` and `.ui-icon` for hover/active/disabled icon button behavior. Use `.ui-primary` or `bg-primary` for primary action buttons.
-
-Keyboard focus matches shared CN: soft **box-shadow glow** `0 0 0 3px` at **50% ring opacity** (no hard offset ring). Tab to preview.
-
-## Brand assets
-
-Logos live in `public/brand-assets/`. **Read [`public/brand-assets/usage.md`](public/brand-assets/usage.md) before using any logo or icon**: it says which file goes where (favicon, Google, desktop, home screen, in-app UI) and what not to do. Icons in `public/brand-assets/icons/` are generated; rebuild them with `npm run icons`.
+Brand asset guidance is in [brand-assets/usage.md](brand-assets/usage.md).

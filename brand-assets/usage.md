@@ -34,7 +34,7 @@ The arrow in both logomarks is a hole. Whatever is behind the mark shows through
 
 ## Generated icons (`icons/`)
 
-Everything in `icons/` is **generated** by `npm run icons` (`scripts/build-icons.mjs`). Don't edit these files. Change the source SVG or the script and regenerate.
+Everything in `icons/` is pre-generated and included with this static site. Keep the variants together when copying the assets. Rebuild the complete set from the source SVGs if the mark changes.
 
 ### Browser tab and search: hinted logomark
 
@@ -49,7 +49,7 @@ Everything in `icons/` is **generated** by `npm run icons` (`scripts/build-icons
 These are **not** plain scaled copies of the SVG. At small sizes the source geometry lands between pixels (e.g. 4.4 px) and blurs, so the script rebuilds the mark per size with the square edges and arrow bars snapped to whole pixels. Rules:
 
 - **Pick the exact pixel size: display size × device pixel ratio.** A 16 px icon on a 125 % screen needs `favicon-20.png`. Use `srcset` with 1x / 1.25x / 1.5x / 2x candidates. Never let the browser stretch a smaller file up.
-- **The favicon's square is the dark-theme surface colour** (`--surface` in `.dark`, currently `#1f1f1f`), not the source mark's near-black `#0A0A0A`. The build script reads it from `src/app/globals.css`, so change the token and re-run `npm run icons`. Never hard-code a different dark.
+- **The favicon's square is the dark-theme surface colour** (`--surface` in `.dark`, currently `#1f1f1f`), not the source mark's near-black `#0A0A0A`. If that token changes, update and regenerate the favicon set to match.
 - **The favicon's arrow is filled solid white, not cut out.** DuckDuckGo, dark search themes and dark browser tabs draw favicons with nothing behind them. A cut-out arrow would show the dark page and the icon would vanish. On light backgrounds the filled version looks identical to the source mark. Never regenerate the favicon from `logomark-dark.svg` directly.
 - One ICO can't switch themes, so the ICO and PNGs are the dark-square version: readable on light and dark. Only `favicon.svg` switches (Safari ignores it).
 
@@ -86,7 +86,7 @@ Not generated yet (they need a non-square layout, so ask first): Windows `Wide31
 
 ## HTML head
 
-This site gets these automatically from `src/app/favicon.ico`, `src/app/icon.svg` and `src/app/apple-icon.png` (Next.js file conventions). For any other site:
+This site's `index.html` links the root `favicon.ico`, `icon.svg`, and `apple-icon.png`. For any other site:
 
 ```html
 <link rel="icon" href="/brand-assets/icons/favicon.ico" sizes="16x16 20x20 24x24 32x32 40x40 48x48 64x64">
@@ -103,4 +103,4 @@ This site gets these automatically from `src/app/favicon.ico`, `src/app/icon.svg
 - Don't add padding around the favicon to "make room". The mark fills its square on purpose, so a circle crop lands inside the rounded square and shows a clean dark circle with the white arrow.
 - Don't recolour, rotate, outline, add shadows to, or stretch any mark.
 - Don't scale a raster up. Pick a larger file, or use the SVG.
-- Don't hand-edit anything in `icons/`. Regenerate with `npm run icons`.
+- Don't hand-edit individual files in `icons/`; regenerate the set together from the source SVGs.
