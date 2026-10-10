@@ -54,12 +54,12 @@ export const DEFAULT_THEME_CSS = `:root {
   --purple-subtle: #f3e8ff;
 
   /* Actions */
-  --primary: #0091ff;
-  --primary-hover: #0077fa;
+  --primary: #006EDD;
+  --primary-hover: color-mix(in srgb, var(--primary) 80%, transparent);
   --primary-active: #0050b2;
-  --primary-disabled: #b7d9f8;
-  --primary-disabled-foreground: #5eb0ef;
-  --primary-subtle: #e1f0ff;
+  --primary-disabled: color-mix(in srgb, var(--primary) 30%, var(--surface));
+  --primary-disabled-foreground: color-mix(in srgb, var(--primary) 65%, var(--surface));
+  --primary-subtle: color-mix(in srgb, var(--primary) 12%, var(--surface));
   --primary-foreground: #ffffff;
   --danger: #f7525f;
   --danger-hover: #e5404d;
@@ -171,12 +171,12 @@ export const DEFAULT_THEME_CSS = `:root {
   --purple-subtle: #59168b;
 
   /* Actions */
-  --primary: #0091ff;
-  --primary-hover: #0077fa;
+  --primary: #006EDD;
+  --primary-hover: color-mix(in srgb, var(--primary) 80%, transparent);
   --primary-active: #0050b2;
-  --primary-disabled: #5eb0ef;
-  --primary-disabled-foreground: #b7d9f8;
-  --primary-subtle: #0050b2;
+  --primary-disabled: color-mix(in srgb, var(--primary) 35%, var(--surface));
+  --primary-disabled-foreground: color-mix(in srgb, var(--primary) 65%, white);
+  --primary-subtle: color-mix(in srgb, var(--primary) 22%, var(--surface));
   --primary-foreground: #ffffff;
   --danger: #f7525f;
   --danger-hover: #f96a75;
