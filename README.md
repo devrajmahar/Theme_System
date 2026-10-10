@@ -4,11 +4,21 @@ Static HTML, CSS, and browser JavaScript theme playground. There is no React, Ne
 
 ## Run locally
 
+On Windows, double-click `start.cmd` or run it from a terminal:
+
+```powershell
+.\start.cmd
+```
+
+Keep that window open, then visit <http://127.0.0.1:8000>. To choose another port, run `.\start.cmd --port 9000`.
+
+You can also start the server directly with Python:
+
 ```bash
 python serve.py
 ```
 
-Open <http://127.0.0.1:8000>. To use another port, run `python serve.py --port 9000`.
+If port 8000 is already in use, run `python serve.py --port 9000` and open <http://127.0.0.1:9000>.
 
 You can also place these files on any static host. Keep `index.html`, `styles.css`, `app.js`, `brand-checks.js`, `media/`, `brand-assets/`, and the three root icon files together. The Brand tab's format checks require an HTTP server because browsers do not allow its asset fetches from `file://`.
 
